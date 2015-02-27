@@ -49,7 +49,7 @@ namespace cpr
 		template<typename Freq>
 		class HuffmanTree
 		{
-			using MinPriorityQueue = std::priority_queue<Node<Freq>, std::vector<Node<Freq>>, std::less<Node<Freq>> >;
+			using MinPriorityQueue = std::priority_queue<Node<Freq>, std::vector<Node<Freq>>, std::greater<Node<Freq>> >;
 		public:
 			template<typename Iterator>
 			HuffmanTree(Iterator first, Iterator last)
