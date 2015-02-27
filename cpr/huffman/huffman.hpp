@@ -89,6 +89,7 @@ namespace cpr
 					auto y = new Node<Freq>(queue.top());	queue.pop();
 					z.left_ = x;
 					z.right_ = y;
+					z.freq_ = x->freq_ + y->freq_;
 					queue.push(z);
 				}
 
