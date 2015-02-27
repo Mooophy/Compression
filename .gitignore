@@ -183,4 +183,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 #
-*Build*
+*build*

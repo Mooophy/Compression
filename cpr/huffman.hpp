@@ -41,26 +41,53 @@ inline bool operator < (Node<Freq> const& lhs, Node<Freq> const& rhs)
 }
 
 
-template<typename Freq>
-Node<Freq> make_huffman_tree(std::set<Node<Freq>> const& set)
-{
-    using MinPreorityQuee = std::priority_queue < Node<Freq>, std::vector<Node<Freq>>, std::greater<Node<Freq>> > ;
-    MinPreorityQuee queue;
-    for (auto const& node : set)
-        queue.push(node);
 
-    for (int _ = 1; _ != set.size(); ++_)
+template<typename Iterator>
+auto make_huffman_tree(Iterator first, Iterator last) -> decltype(*first)
+{
+
+    using Freq = decltype(first->freq_);
+    using MinPriorityQueue = std::priority_queue<Node<Freq>, std::vector<Node<Freq>>, std::greater<Node<Freq>> > ;
+
+//    auto size = last - first;
+    auto size = std::distance(first, last);
+    MinPriorityQueue queue;
+    for(auto curr = first; curr != last; ++curr)
+        queue.push(*curr);
+
+    for(int _ = 1; _ != size; ++_)
     {
         Node<Freq> z;
         auto x = new Node<Freq>(queue.top());	queue.pop();
         auto y = new Node<Freq>(queue.top());	queue.pop();
-        z.left_ = x, z.right_ = y;
-        z.freq_ = x->freq_ + y->freq_;
+        z.left_ = x;
+        z.right_ = y;
         queue.push(z);
     }
 
     return queue.top();
 }
+
+//template<typename Freq>
+//Node<Freq> make_huffman_tree(std::set<Node<Freq>> const& set)
+//{
+//    using MinPreorityQuee = std::priority_queue < Node<Freq>, std::vector<Node<Freq>>, std::greater<Node<Freq>> > ;
+//    MinPreorityQuee queue;
+//    for (auto const& node : set)
+//        queue.push(node);
+
+//    for (int _ = 1; _ != set.size(); ++_)
+//    {
+//        Node<Freq> z;
+//        auto x = new Node<Freq>(queue.top());	queue.pop();
+//        auto y = new Node<Freq>(queue.top());	queue.pop();
+//        z.left_ = x, z.right_ = y;
+//        z.freq_ = x->freq_ + y->freq_;
+//        queue.push(z);
+//    }
+
+//    return queue.top();
+//}
 
 }}//namespace
 

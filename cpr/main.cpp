@@ -12,7 +12,7 @@ int main()
 
     for(auto ch : v)
     {
-        auto it = std::find_if(set.begin(), set.end(), [](cpr::huffman::Node<int> node){return node.character_ == 'a';});
+        auto it = std::find_if(set.begin(), set.end(), [ch](cpr::huffman::Node<int> node){return node.character_ == ch;});
         if( it != set.end())
         {
             auto temp = *it;
@@ -23,6 +23,8 @@ int main()
         else
             set.insert(*it);
     }
+
+    auto tree = cpr::huffman::make_huffman_tree(set.cbegin(), set.cend());
 
     return 0;
 }
