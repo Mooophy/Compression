@@ -62,6 +62,11 @@ namespace cpr
 				return std::cout;
 			}
 
+			unsigned encode(char ch) const
+			{
+				return char_to_code(ch);
+			}
+
 			~HuffmanTree()
 			{
 				release(root_);
@@ -69,6 +74,29 @@ namespace cpr
 
 		private:
 			Node<Freq>* root_;
+
+			unsigned char_to_code(char ch)const
+			{
+				unsigned code = 0;
+				using Lambda = std::function < void(unsigned, Node<Freq>*) > ;
+				Lambda search = [&code, =](unsigned first_part, Node<Freq>* node)->int
+				{
+					if (!node)
+						return;
+
+					if (node->character_ == ch)
+					{
+						code = first_part;
+						return;
+					}
+					else
+					{
+						search((first_part << 1) + 0, node->left_);
+						search((first_part << 1) + 1, node->right_);
+					}
+				}
+				return code;
+			}
 
 			void release(Node<Freq>* tree) const
 			{

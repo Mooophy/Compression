@@ -19,5 +19,7 @@ int main()
 	std::vector<Char> C{ Char('a', 45), Char('b', 13), Char('c', 12), Char('d', 16), Char('e', 9), Char('f', 5) };
 	cpr::huffman::HuffmanTree<int> huff_tree(C.cbegin(), C.cend());
 	huff_tree.print();
+
+	std::cout << "\nexit" << std::endl;
 	return 0;
 }
