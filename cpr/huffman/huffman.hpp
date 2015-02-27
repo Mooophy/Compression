@@ -78,8 +78,8 @@ namespace cpr
 			unsigned char_to_code(char ch)const
 			{
 				unsigned code = 0;
-				using Lambda = std::function < void(unsigned, Node<Freq>*) > ;
-				Lambda search = [&code, =](unsigned first_part, Node<Freq>* node)->int
+				using Lambda = std::function < void(unsigned, const Node<Freq>*) > ;
+				Lambda search = [=,&search,&code](unsigned first_part, const Node<Freq>* node) 
 				{
 					if (!node)
 						return;
@@ -94,7 +94,9 @@ namespace cpr
 						search((first_part << 1) + 0, node->left_);
 						search((first_part << 1) + 1, node->right_);
 					}
-				}
+				};
+
+				search(0, root_);
 				return code;
 			}
 
