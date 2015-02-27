@@ -62,8 +62,23 @@ namespace cpr
 				return std::cout;
 			}
 
+			~HuffmanTree()
+			{
+				release(root_);
+			}
+
 		private:
 			Node<Freq>* root_;
+
+			void release(Node<Freq>* tree) const
+			{
+				if (tree)
+				{
+					release(tree->left_);
+					release(tree->right_);
+					delete tree;
+				}
+			}
 
 			void preorder(const Node<Freq>* node) const
 			{
@@ -98,6 +113,4 @@ namespace cpr
 		};
 	}
 }
-
-
 #endif // !HUFFMAN_HPP
