@@ -1,5 +1,6 @@
 #include <iostream>
 #include "huffman.hpp"
+#include "buffer.hpp"
 
 int main()
 {
@@ -11,6 +12,11 @@ int main()
 	std::cout << "\nfor encoding : \n";
 	for (auto ch : C)
 		std::cout << "the code for char " << ch.character_ << " is " << huff_tree.encode(ch.character_) << std::endl;
+
+
+	////////////test for buffer
+
+	cpr::huffman::Buffer<char> buff;
 
 	std::cout << "\nexit normally" << std::endl;
 	return 0;
