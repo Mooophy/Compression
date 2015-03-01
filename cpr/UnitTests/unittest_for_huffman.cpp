@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../huffman/huffman.hpp"
+#include <sstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -42,6 +43,28 @@ namespace UnitTests
 		{
 			auto node = cpr::huffman::Node<long>('a', 10);
 			Assert::IsTrue(node.is_leaf());
+		}
+
+		TEST_METHOD(operator_greater_than)
+		{
+			auto lhs = cpr::huffman::Node<long>('a', 42);
+			auto rhs = cpr::huffman::Node<long>('c', 41);
+			Assert::IsTrue(lhs > rhs);
+		}
+
+		TEST_METHOD(operator_less_than)
+		{
+			auto lhs = cpr::huffman::Node<long>('a', 42);
+			auto rhs = cpr::huffman::Node<long>('c', 41);
+			Assert::IsTrue(rhs < lhs);
+		}
+
+		TEST_METHOD(operator_output)
+		{
+			std::stringstream stream;
+			auto node = cpr::huffman::Node<long>('a', 10);
+			stream << node;
+			Assert::AreEqual("[a,10]", stream.str().c_str());
 		}
 	};
 }
