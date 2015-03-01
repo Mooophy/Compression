@@ -69,7 +69,8 @@ namespace cpr
 				return std::cout;
 			}
 
-			unsigned encode(char ch) const
+			template<typename T>
+			unsigned encode(T ch) const
 			{
 				return char_to_code(ch);
 			}
