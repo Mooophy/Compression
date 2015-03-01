@@ -30,7 +30,7 @@ namespace cpr
 
 			bool is_leaf() const
 			{
-				return left_ || right_;
+				return !left_ && !right_;
 			}
 		};
 
