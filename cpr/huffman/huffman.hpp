@@ -24,7 +24,7 @@ namespace cpr
 				: character_{ other.character_ }, freq_{ other.freq_ }, left_{ other.left_ }, right_{ other.right_ }
 			{	}
 
-			char character_;
+			unsigned char character_;
 			Freq freq_;
 			Node *left_, *right_;
 
@@ -74,6 +74,11 @@ namespace cpr
 				release(root_);
 			}
 
+			const Node<Freq>* root() const
+			{
+				return root_;
+			}
+
 		private:
 			Node<Freq>* root_;
 
@@ -97,6 +102,9 @@ namespace cpr
 				}
 			}
 
+			//
+			//huffman coding algorithm
+			//
 			template<typename Iterator>
 			Node<Freq>* make_tree(Iterator first, Iterator last)
 			{
