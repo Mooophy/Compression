@@ -2,6 +2,7 @@
 #include <fstream>
 #include <queue>
 #include <functional>
+#include "buffer.hpp"
 
 #ifndef HUFFMAN_HPP
 #define HUFFMAN_HPP
@@ -26,6 +27,11 @@ namespace cpr
 			char character_;
 			Freq freq_;
 			Node *left_, *right_;
+
+			bool is_leaf() const
+			{
+				return left_ || right_;
+			}
 		};
 
 		template<typename Freq>
@@ -43,6 +49,7 @@ namespace cpr
 		{
 			return os << "[" << node.character_ << "," << node.freq_ << "]";
 		}
+
 
 
 
@@ -65,6 +72,12 @@ namespace cpr
 			unsigned encode(char ch) const
 			{
 				return char_to_code(ch);
+			}
+
+			template<typename T>
+			std::vector<T> decode(cpr::huffman::Buffer<T> buff) const
+			{
+				return code_to_char(buff);
 			}
 
 			~HuffmanTree()
@@ -98,6 +111,20 @@ namespace cpr
 
 				search(0, root_);
 				return code;
+			}
+
+			template<typename T>
+			std::vector<T> code_to_char(cpr::huffman::Buffer<T> buff) const
+			{
+				std::vector<T> decoded;
+				while (!buff.data().empty())
+				{
+					auto curr = root_;
+					while (!curr->is_leaf())
+						curr = buff.pop_front_bit() == 0 ? curr->left_ : curr->right_;
+					decoded.push_back(curr->character_);
+				}
+				return decoded;
 			}
 
 			void release(Node<Freq>* tree) const
