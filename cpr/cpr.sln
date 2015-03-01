@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "huffman", "huffman\huffman.vcxproj", "{8A2CC8C2-35D2-4F70-9CDA-356203FF792A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{04E68102-7146-4F9F-A93C-1B3CA6BCD986}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "huffman", "huffman\huffman.vcxproj", "{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +11,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A2CC8C2-35D2-4F70-9CDA-356203FF792A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8A2CC8C2-35D2-4F70-9CDA-356203FF792A}.Debug|Win32.Build.0 = Debug|Win32
-		{8A2CC8C2-35D2-4F70-9CDA-356203FF792A}.Release|Win32.ActiveCfg = Release|Win32
-		{8A2CC8C2-35D2-4F70-9CDA-356203FF792A}.Release|Win32.Build.0 = Release|Win32
-		{04E68102-7146-4F9F-A93C-1B3CA6BCD986}.Debug|Win32.ActiveCfg = Debug|Win32
-		{04E68102-7146-4F9F-A93C-1B3CA6BCD986}.Debug|Win32.Build.0 = Debug|Win32
-		{04E68102-7146-4F9F-A93C-1B3CA6BCD986}.Release|Win32.ActiveCfg = Release|Win32
-		{04E68102-7146-4F9F-A93C-1B3CA6BCD986}.Release|Win32.Build.0 = Release|Win32
+		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Debug|Win32.Build.0 = Debug|Win32
+		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Release|Win32.ActiveCfg = Release|Win32
+		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
