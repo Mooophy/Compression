@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "huffman", "huffman\huffman.vcxproj", "{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTestsForHuffman", "UnitTests\UnitTests.vcxproj", "{8DFDD6AC-EC4C-4687-B6C0-8BFD0C77029A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Debug|Win32.Build.0 = Debug|Win32
 		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Release|Win32.ActiveCfg = Release|Win32
 		{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}.Release|Win32.Build.0 = Release|Win32
+		{8DFDD6AC-EC4C-4687-B6C0-8BFD0C77029A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8DFDD6AC-EC4C-4687-B6C0-8BFD0C77029A}.Debug|Win32.Build.0 = Debug|Win32
+		{8DFDD6AC-EC4C-4687-B6C0-8BFD0C77029A}.Release|Win32.ActiveCfg = Release|Win32
+		{8DFDD6AC-EC4C-4687-B6C0-8BFD0C77029A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
