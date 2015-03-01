@@ -11,9 +11,9 @@ int main()
 	huff_tree.print();
 
 	///////////test for encoding
-	std::cout << "\n--test for encoding : \n";
-	for (auto ch : C)
-		std::cout << "the code for char " << ch.character_ << " is " << huff_tree.encode(ch.character_) << std::endl;
+	//std::cout << "\n--test for encoding : \n";
+	//for (auto ch : C)
+	//	std::cout << "the code for char " << ch.character_ << " is " << huff_tree.encode(ch.character_) << std::endl;
 
 	////////////test for buffer
 	std::cout << "\n--test for buffer\n";

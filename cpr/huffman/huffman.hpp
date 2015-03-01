@@ -69,17 +69,17 @@ namespace cpr
 				return std::cout;
 			}
 
-			template<typename T>
-			unsigned encode(T ch) const
-			{
-				return char_to_code(ch);
-			}
+			//template<typename T>
+			//unsigned encode(T ch) const
+			//{
+			//	return char_to_code(ch);
+			//}
 
-			template<typename T>
-			std::vector<T> decode(cpr::huffman::Buffer<T> buff) const
-			{
-				return code_to_char(buff);
-			}
+			//template<typename T>
+			//std::vector<T> decode(cpr::huffman::Buffer<T> buff) const
+			//{
+			//	return code_to_char(buff);
+			//}
 
 			~HuffmanTree()
 			{
@@ -89,44 +89,44 @@ namespace cpr
 		private:
 			Node<Freq>* root_;
 
-			unsigned char_to_code(char ch)const
-			{
-				unsigned code = 0;
-				using Lambda = std::function < void(unsigned, const Node<Freq>*) > ;
-				Lambda search = [=,&search,&code](unsigned first_part, const Node<Freq>* node) 
-				{
-					if (!node)
-						return;
+			//unsigned char_to_code(char ch)const
+			//{
+			//	unsigned code = 0;
+			//	using Lambda = std::function < void(unsigned, const Node<Freq>*) > ;
+			//	Lambda search = [=,&search,&code](unsigned first_part, const Node<Freq>* node) 
+			//	{
+			//		if (!node)
+			//			return;
 
-					if (node->character_ == ch)
-					{
-						code = first_part;
-						return;
-					}
-					else
-					{
-						search((first_part << 1) + 0, node->left_);
-						search((first_part << 1) + 1, node->right_);
-					}
-				};
+			//		if (node->character_ == ch)
+			//		{
+			//			code = first_part;
+			//			return;
+			//		}
+			//		else
+			//		{
+			//			search((first_part << 1) + 0, node->left_);
+			//			search((first_part << 1) + 1, node->right_);
+			//		}
+			//	};
 
-				search(0, root_);
-				return code;
-			}
+			//	search(0, root_);
+			//	return code;
+			//}
 
-			template<typename T>
-			std::vector<T> code_to_char(cpr::huffman::Buffer<T> buff) const
-			{
-				std::vector<T> decoded;
-				while (!buff.data().empty())
-				{
-					auto curr = root_;
-					while (!curr->is_leaf())
-						curr = buff.pop_front_bit() == 0 ? curr->left_ : curr->right_;
-					decoded.push_back(curr->character_);
-				}
-				return decoded;
-			}
+			//template<typename T>
+			//std::vector<T> code_to_char(cpr::huffman::Buffer<T> buff) const
+			//{
+			//	std::vector<T> decoded;
+			//	while (!buff.data().empty())
+			//	{
+			//		auto curr = root_;
+			//		while (!curr->is_leaf())
+			//			curr = buff.pop_front_bit() == 0 ? curr->left_ : curr->right_;
+			//		decoded.push_back(curr->character_);
+			//	}
+			//	return decoded;
+			//}
 
 			void release(Node<Freq>* tree) const
 			{
