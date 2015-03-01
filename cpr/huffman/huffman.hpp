@@ -69,25 +69,25 @@ namespace cpr
 				return std::cout;
 			}
 
-			~HuffmanTree()
-			{
-				release(root_);
-			}
-
 			const Node<Freq>* root() const
 			{
 				return root_;
 			}
 
+			~HuffmanTree()
+			{
+				release(root_);
+			}
 		private:
 			Node<Freq>* root_;
 
-			void release(Node<Freq>* tree) const
+			void release(Node<Freq>* tree) 
 			{
 				if (tree)
 				{
 					release(tree->left_);
 					release(tree->right_);
+					//tree->left_ = tree->right_ = nullptr;
 					delete tree;
 				}
 			}

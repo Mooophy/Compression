@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "../huffman/huffman.hpp"
 #include <sstream>
+#include <vector>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -65,6 +66,22 @@ namespace UnitTests
 			auto node = cpr::huffman::Node<long>('a', 10);
 			stream << node;
 			Assert::AreEqual("[a,10]", stream.str().c_str());
+		}
+	};
+
+	TEST_CLASS(TestHuffmanTree)
+	{
+	public:
+		TEST_METHOD(ctor)
+		{
+			using Nd = cpr::huffman::Node < long > ;
+			auto test_case = std::vector < Nd > 
+			{
+				//Nd('a', 45), Nd('b', 13), Nd('c', 12), Nd('d', 16), Nd('e', 9), Nd('f', 5)
+				Nd('a', 45)
+			};
+
+			auto huffman_tree = cpr::huffman::HuffmanTree<long>(test_case.cbegin(), test_case.cend());
 		}
 	};
 }
