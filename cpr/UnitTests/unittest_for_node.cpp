@@ -13,7 +13,6 @@ namespace unit_tests_for_huffman
 		TEST_METHOD(test_ctor)
 		{
 			auto node = cpr::huffman::Node();
-
 			Assert::IsNull(node.left_.get());
 			Assert::IsNull(node.right_.get());
 			Assert::AreEqual((uint8_t)0, node.character_);

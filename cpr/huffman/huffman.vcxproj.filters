@@ -23,5 +23,8 @@
     <ClInclude Include="node.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="huffman_tree.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

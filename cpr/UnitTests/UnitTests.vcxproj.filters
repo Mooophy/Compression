@@ -26,7 +26,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="unittest_fpr_node.cpp">
+    <ClCompile Include="unit_test_for_huffman_tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unittest_for_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
