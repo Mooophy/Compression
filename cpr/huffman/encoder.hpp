@@ -17,11 +17,6 @@ namespace cpr
 				: raw_(raw), frequencies_(find_frequencies(raw)), huff_tree_(frequencies_.cbegin(), frequencies_.cend())
 			{	}
 
-			std::vector<unsigned char> get_result() const
-			{
-
-			}
-
 		private:
 			const std::vector<unsigned char> raw_;
 			const std::vector<Node<long>> frequencies_;
@@ -46,11 +41,14 @@ namespace cpr
 				return frequencies;
 			}
 
-			std::vector<unsigned char> encode() const
-			{
+			//std::vector<unsigned char> encode() const
+			//{
 
-			}
+			//}
 
+			//
+			// not tested yet 
+			//
 			unsigned char uchar_to_code(unsigned char uchar)const
 			{
 				unsigned char code = 0;
