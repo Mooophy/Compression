@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FE19C9FF-0B02-4D12-AC36-66E55EEBCEA8}</ProjectGuid>
+    <ProjectGuid>{1D1CCDFE-663C-43E9-BAD9-8ED42E7E0C08}</ProjectGuid>
     <RootNamespace>huffman</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -67,7 +67,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="huffman_tree.hpp" />
     <ClInclude Include="node.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,9 +10,10 @@ namespace cpr
 {
 	namespace huffman
 	{
+		template<typename Char, typename Freq>
 		struct Node
 		{
-			using UniquePointer = std::unique_ptr < Node > ;
+			using SharedPointer = std::shared_ptr < Node<Char, Freq> > ;
 
 			//default ctor
 			Node()
@@ -20,45 +21,50 @@ namespace cpr
 			{   }
 
 			//ctor
-			Node(uint8_t ch, uint64_t freq)
+			Node(Char ch, Freq freq)
 				: character_{ ch }, freq_{ freq }, left_{ nullptr }, right_{ nullptr }
 			{   }
 
-			//move ctor
-			Node(Node && other)
-				: character_{ other.character_ }, freq_{ other.freq_ }, left_{ other.left_.release() }, right_{ other.right_.release() }
-			{	}
+			Char character_;
+			Freq freq_;
+			SharedPointer left_, right_;
 
-			//data members
-			uint8_t character_;
-			uint64_t freq_;
-			UniquePointer left_, right_;
-
-			//public interface
 			bool is_leaf() const
 			{
 				return !left_ && !right_;
 			}
 		};
 
-		//
-		// non member functions
-		//
-
-		inline bool operator > (Node const& lhs, Node const& rhs)
+		template<typename Char, typename Freq>
+		inline bool operator > (Node<Char, Freq> const& lhs, Node<Char, Freq> const& rhs)
 		{
 			return lhs.freq_ > rhs.freq_;
 		}
 
-		inline bool operator < (Node const& lhs, Node const& rhs)
+		template<typename Char, typename Freq>
+		inline bool operator < (Node<Char, Freq> const& lhs, Node<Char, Freq> const& rhs)
 		{
 			return lhs.freq_ < rhs.freq_;
 		}
 
-		inline std::ostream& operator<<(std::ostream& os, Node const& node)
+		template<typename Char, typename Freq>
+		inline std::ostream& operator<<(std::ostream& os, Node<Char, Freq> const& node)
 		{
 			return os << "[" << node.character_ << "," << node.freq_ << "]";
 		}
+
+		template<typename Char, typename Freq>
+		std::shared_ptr < Node<Char, Freq>> make_new_node()
+		{
+			return std::make_shared<Node<Char, Freq>>();
+		}
+
+		template<typename Char, typename Freq>
+		std::shared_ptr < Node<Char, Freq>> make_new_node(Char ch, Freq freq)
+		{
+			return std::make_shared<Node<Char, Freq>>(ch, freq);
+		}
+
 	}
 }
 #endif // !NODE_HPP
