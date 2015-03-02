@@ -9,11 +9,11 @@ namespace unit_test_for_huffman
 {
 	using Node = cpr::huffman::Node <unsigned char, unsigned long > ;
 
-	TEST_CLASS(UnitTestForNode)
+	TEST_CLASS(TestNode)
 	{
 	public:
 		
-		TEST_METHOD(test_default_ctor)
+		TEST_METHOD(default_ctor)
 		{
 			Node node;
 
@@ -23,7 +23,7 @@ namespace unit_test_for_huffman
 			Assert::IsNull(node.right_.get());
 		}
 
-		TEST_METHOD(test_ctor_with_2_args)
+		TEST_METHOD(ctor_with_2_args)
 		{
 			Node node{'a', 42ul};
 
@@ -33,13 +33,30 @@ namespace unit_test_for_huffman
 			Assert::IsNull(node.right_.get());
 		}
 
-		TEST_METHOD(test_is_leaf)
+		TEST_METHOD(copy_ctor)
+		{
+			Node lhs{ 'a', 42ul };
+			lhs.left_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
+			lhs.right_ = cpr::huffman::make_new_node<unsigned char, unsigned long>('b', 99ul);
+			Node rhs(lhs);
+
+			Assert::AreEqual(lhs.character_, rhs.character_);
+			Assert::AreEqual(lhs.freq_, rhs.freq_);
+
+			Assert::IsTrue(lhs.left_ == rhs.left_);
+			Assert::IsTrue(lhs.right_ == rhs.right_);
+
+			Assert::AreSame(lhs.left_->character_, rhs.left_->character_);
+			Assert::AreSame(lhs.left_->freq_, rhs.left_->freq_);
+		}
+
+		TEST_METHOD(is_leaf)
 		{
 			Node node;
 			Assert::IsTrue(node.is_leaf());
 		}
 
-		TEST_METHOD(test_make_new_node_without_args)
+		TEST_METHOD(make_new_node_without_args)
 		{
 			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>();
 
@@ -49,7 +66,7 @@ namespace unit_test_for_huffman
 			Assert::IsNull(pointer->right_.get());
 		}
 
-		TEST_METHOD(test_make_new_node_with_2_args)
+		TEST_METHOD(make_new_node_with_2_args)
 		{
 			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
 
@@ -59,7 +76,7 @@ namespace unit_test_for_huffman
 			Assert::IsNull(pointer->right_.get());
 		}
 
-		TEST_METHOD(test_for_shared_pointer)
+		TEST_METHOD(for_shared_pointer)
 		{
 			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
 			auto p2 = pointer;

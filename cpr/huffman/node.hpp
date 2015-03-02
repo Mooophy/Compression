@@ -13,7 +13,7 @@ namespace cpr
 		template<typename Char, typename Freq>
 		struct Node
 		{
-			using SharedPointer = std::shared_ptr < Node<Char, Freq> > ;
+			using SharedNode = std::shared_ptr < Node<Char, Freq> > ;
 
 			//default ctor
 			Node()
@@ -27,7 +27,7 @@ namespace cpr
 
 			Char character_;
 			Freq freq_;
-			SharedPointer left_, right_;
+			SharedNode left_, right_;
 
 			bool is_leaf() const
 			{
@@ -64,7 +64,6 @@ namespace cpr
 		{
 			return std::make_shared<Node<Char, Freq>>(ch, freq);
 		}
-
 	}
 }
 #endif // !NODE_HPP
