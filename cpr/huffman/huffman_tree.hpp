@@ -32,17 +32,24 @@ namespace cpr
 			std::string to_string() const
 			{
 				std::string str;
-				auto inorder = [&](const SharedNode node)
+				std::function<void(SharedNode)> inorder = [&](SharedNode node)
 				{
 					if (node)
 					{
 						inorder(node->left_);
-						std::stringstream sstream;
-						sstream << *node;
-						str += sstream.str();
+
+						str.push_back('[');
+						str.push_back(node->character_ == 0 ? '_' : node->character_);
+						str.push_back(',');
+						str += std::to_string(node->freq_);
+						str.push_back(']');
+						
 						inorder(node->right_);
 					}
-				}
+				};
+
+				inorder(root_);
+				return str;
 			}
 
 		private:

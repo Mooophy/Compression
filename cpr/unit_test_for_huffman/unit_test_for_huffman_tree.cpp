@@ -39,5 +39,21 @@ namespace unit_test_for_huffman
 
 			// more test needed , but for now clrs is unavailable 
 		}
+
+		TEST_METHOD(to_string)
+		{
+			auto empty_case = std::vector<unsigned char>();
+			FrequencyMap fmap_from_clrs(empty_case);
+			fmap_from_clrs['a'] = 45;
+			fmap_from_clrs['b'] = 13;
+			fmap_from_clrs['c'] = 12;
+			fmap_from_clrs['d'] = 16;
+			fmap_from_clrs['e'] = 9;
+			fmap_from_clrs['f'] = 5;
+			HuffmanTree htree_from_clrs{ fmap_from_clrs };
+
+			std::string expected = "[a,45][_,100][c,12][_,25][b,13][_,55][f,5][_,14][e,9][_,30][d,16]";
+			Assert::AreEqual(expected, htree_from_clrs.to_string());
+		}
 	};
 }
