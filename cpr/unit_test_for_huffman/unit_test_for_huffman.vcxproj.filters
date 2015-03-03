@@ -29,5 +29,8 @@
     <ClCompile Include="unit_test_for_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="unit_test_for_frequency_map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

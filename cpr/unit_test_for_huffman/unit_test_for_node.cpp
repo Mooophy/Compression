@@ -9,7 +9,7 @@ namespace unit_test_for_huffman
 {
 	using Node = cpr::huffman::Node <unsigned char, unsigned long > ;
 
-	TEST_CLASS(TestNode)
+	TEST_CLASS(test_node)
 	{
 	public:
 		
