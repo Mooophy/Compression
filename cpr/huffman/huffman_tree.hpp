@@ -1,10 +1,10 @@
 #include "node.hpp"
 #include "frequency_map.hpp"
-#include <set>
 #include <map>
 #include <fstream>
 #include <queue>
 #include <functional>
+#include <string>
 
 
 #ifndef HUFFMAN_TREE_HPP
@@ -24,9 +24,25 @@ namespace cpr
 				: root_{make_tree(map)}
 			{}
 
-			const SharedNode root()const
+			const SharedNode root() const
 			{
 				return root_;
+			}
+
+			std::string to_string() const
+			{
+				std::string str;
+				auto inorder = [&](const SharedNode node)
+				{
+					if (node)
+					{
+						inorder(node->left_);
+						std::stringstream sstream;
+						sstream << *node;
+						str += sstream.str();
+						inorder(node->right_);
+					}
+				}
 			}
 
 		private:

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../huffman/huffman_tree.hpp"
+#include <sstream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
