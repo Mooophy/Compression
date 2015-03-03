@@ -29,5 +29,8 @@
     <ClInclude Include="frequency_map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_word_dictionary.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
