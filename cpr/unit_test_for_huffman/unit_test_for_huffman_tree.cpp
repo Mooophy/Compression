@@ -37,7 +37,7 @@ namespace unit_test_for_huffman
 			Assert::AreEqual((unsigned char)0, htree_from_clrs.root()->character_);
 			Assert::AreEqual((unsigned char)'a', htree_from_clrs.root()->left_->character_);
 
-			// more test needed , but for now clrs is unavailable 
+			//! the rest is tested below using method "to_string".
 		}
 
 		TEST_METHOD(to_string)
