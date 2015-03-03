@@ -24,7 +24,7 @@ namespace cpr
 				: root_{make_tree(map)}
 			{}
 
-			const SharedNode root() const
+			SharedNode root() const
 			{
 				return root_;
 			}
