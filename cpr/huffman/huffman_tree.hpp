@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "frequency_map.hpp"
 #include <set>
 #include <map>
 #include <fstream>
@@ -18,7 +19,7 @@ namespace cpr
 		{
 		public:
 			using SharedNode = Node<Char, Freq>::SharedNode;
-			using FrequencyMap = std::map < Char, Freq > ;
+			//using FrequencyMap = std::map < Char, Freq > ;
 
 			explicit HuffmanTree(FrequencyMap const& map)
 				: root_{make_tree(map)}
