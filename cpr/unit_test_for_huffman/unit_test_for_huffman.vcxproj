@@ -95,6 +95,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="unit_test_for_frequency_map.cpp" />
+    <ClCompile Include="unit_test_for_huffman_tree.cpp" />
     <ClCompile Include="unit_test_for_node.cpp" />
   </ItemGroup>
   <ItemGroup>

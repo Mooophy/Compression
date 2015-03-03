@@ -64,6 +64,12 @@ namespace cpr
 		{
 			return std::make_shared<Node<Char, Freq>>(ch, freq);
 		}
+
+		template<typename Char, typename Freq>
+		std::shared_ptr < Node<Char, Freq>> make_new_node(Node<Char, Freq> const& other)
+		{
+			return std::make_shared<Node<Char, Freq>>(other);
+		}
 	}
 }
 #endif // !NODE_HPP

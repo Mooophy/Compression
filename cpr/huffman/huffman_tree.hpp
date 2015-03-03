@@ -18,22 +18,26 @@ namespace cpr
 		class HuffmanTree
 		{
 		public:
-			using SharedNode = Node<Char, Freq>::SharedNode;
-			//using FrequencyMap = std::map < Char, Freq > ;
-
-			explicit HuffmanTree(FrequencyMap const& map)
+			using SharedNode = typename Node<Char, Freq>::SharedNode;
+			
+			explicit HuffmanTree(FrequencyMap<Char, Freq> const& map)
 				: root_{make_tree(map)}
 			{}
 
+			const SharedNode root()const
+			{
+				return root_;
+			}
+
 		private:
-			SharedNode root_;
+			const SharedNode root_;
 
 			// huffman coding algorithm 
 			// based on a pseudocode on 16.3 CLRS 3rd.
-			SharedNode make_tree(FrequencyMap const& map) const
+			SharedNode make_tree(FrequencyMap<Char, Freq> const& map) const
 			{
 					auto greater = [](SharedNode lhs, SharedNode rhs){return lhs->freq_ > rhs->freq_; };
-					using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>>, decltype(greater) > ;
+					using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>, decltype(greater) > ;
 
 					MinPriorityQueue queue(greater);
 					for (auto const& pair : map)
@@ -46,7 +50,7 @@ namespace cpr
 						queue.pop();
 						merge->right_ = make_new_node(*queue.top());
 						queue.pop();
-						merge.freq_ = merge.left_->freq_ + merge.right_->freq_;
+						merge->freq_ = merge->left_->freq_ + merge->right_->freq_;
 						queue.push(merge);
 					}
 

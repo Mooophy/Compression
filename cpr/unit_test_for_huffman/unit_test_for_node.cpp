@@ -76,6 +76,27 @@ namespace unit_test_for_huffman
 			Assert::IsNull(pointer->right_.get());
 		}
 
+		TEST_METHOD(make_new_node_that_calling_copy_ctor)
+		{
+			auto copied_from = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
+			copied_from->left_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
+			copied_from->right_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
+
+			auto copied_to = cpr::huffman::make_new_node<unsigned char, unsigned long>(*copied_from);
+
+			Assert::AreEqual(copied_from->character_, copied_to->character_);
+			Assert::AreEqual(copied_from->freq_, copied_to->freq_);
+
+			Assert::AreEqual(true, copied_from->left_ == copied_to->left_);
+			Assert::AreEqual(true, copied_from->right_ == copied_to->right_);
+
+			Assert::AreSame(copied_from->left_->character_, copied_to->left_->character_);
+			Assert::AreSame(copied_from->left_->freq_, copied_to->left_->freq_);
+
+			Assert::AreSame(copied_from->right_->character_, copied_to->right_->character_);
+			Assert::AreSame(copied_from->right_->freq_, copied_to->right_->freq_);
+		}
+
 		TEST_METHOD(for_shared_pointer)
 		{
 			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
