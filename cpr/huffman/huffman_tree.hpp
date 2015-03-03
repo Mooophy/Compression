@@ -1,5 +1,6 @@
 #include "node.hpp"
 #include <set>
+#include <map>
 #include <fstream>
 #include <queue>
 #include <functional>
@@ -17,36 +18,39 @@ namespace cpr
 		{
 		public:
 			using SharedNode = Node<Char, Freq>::SharedNode;
+			using FrequencyMap = std::map < Char, Freq > ;
 
-			//template<typename Container>
-			//explicit HuffmanTree(Container const& nodes)
-			//	: root_{ make_tree(nodes) }
-			//{	}
+			explicit HuffmanTree(FrequencyMap const& map)
+				: root_{make_tree(map)}
+			{}
 
 		private:
 			SharedNode root_;
 
-			//template<typename Container>
-			//SharedNode make_tree(Container const& nodes) const
-			//{
-			//	auto greater = [](SharedNode lhs, SharedNode rhs){return lhs->freq_ > rhs->freq_; };
-			//	using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>>, decltype(greater) > ;
+			// huffman coding algorithm 
+			// based on a pseudocode on 16.3 CLRS 3rd.
+			SharedNode make_tree(FrequencyMap const& map) const
+			{
+					auto greater = [](SharedNode lhs, SharedNode rhs){return lhs->freq_ > rhs->freq_; };
+					using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>>, decltype(greater) > ;
 
-			//	MinPriorityQueue queue(greater);
-			//	for (auto const& n : node)
-			//		queue.push(make_new_node(n));
+					MinPriorityQueue queue(greater);
+					for (auto const& pair : map)
+						queue.push(make_new_node(pair.first, pair.second));
+					
+					for (int count = 1; count != map.size(); ++count)
+					{
+						auto merge = make_new_node<Char, Freq>();
+						merge->left_ = make_new_node(*queue.top());
+						queue.pop();
+						merge->right_ = make_new_node(*queue.top());
+						queue.pop();
+						merge.freq_ = merge.left_->freq_ + merge.right_->freq_;
+						queue.push(merge);
+					}
 
-			//	for (int _ = 1; _ != container.size(); ++_)
-			//	{
-			//		auto z = make_new_node();
-			//		z->left_ = make_new_node(queue.top());
-			//		queue.pop();
-			//		z->right_ = make_new_node(queue.top());
-			//		queue.pop();
-			//		z.freq_ = z.left_->freq_ + z.right_->freq_;
-			//		queue.push(z);
-			//	}
-			//}
+					return queue.top();
+			}
 		};
 	}
 }
