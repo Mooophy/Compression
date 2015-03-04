@@ -54,7 +54,15 @@ namespace cpr
 			// based on a pseudocode on 16.3 CLRS 3rd.
 			SharedNode make_tree(FrequencyMap<Char, Freq> const& map) const
 			{
-					auto greater = [](SharedNode lhs, SharedNode rhs){return lhs->freq_ > rhs->freq_; };
+					auto greater = [](SharedNode lhs, SharedNode rhs)
+					{
+						if (lhs->freq_ != rhs->freq_)
+							return lhs->freq_ > rhs->freq_;
+						else
+							return lhs->character_ > rhs->character_;
+					};
+
+
 					using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>, decltype(greater) > ;
 
 					MinPriorityQueue queue(greater);
