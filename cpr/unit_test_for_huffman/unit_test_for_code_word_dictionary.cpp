@@ -38,6 +38,5 @@ namespace unit_test_for_huffman
 			Assert::IsTrue(0x0d == dic.at('e'));	//e : 1101b
 			Assert::IsTrue(0x07 == dic.at('d'));	//d : 111b
 		}
-
 	};
 }

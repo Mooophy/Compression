@@ -13,27 +13,26 @@ namespace cpr
 		{
 			using SharedNode = typename cpr::huffman::Node<Char, Freq>::SharedNode;
 		public:
-			explicit CodeWordDictionary(HuffmanTree<Char, Freq> const& htree)
+			explicit CodeWordDictionary(HuffmanTree<Char, Freq> const& huffman_tree)
 			{
-				std::function<void(CodeWord, SharedNode)> 
-					fill_dic_by_dfs = [=,&fill_dic_by_dfs](CodeWord path, SharedNode node)
-				{
-					if (node)
-					{
-						if (node->character_ != 0)
-						{
-							(*this)[node->character_] = path;
-							return;
-						}
-						else
-						{
-							fill_dic_by_dfs((path << 1) + 0, node->left_);
-							fill_dic_by_dfs((path << 1) + 1, node->right_);
-						}
-					}
-				};
+				fill_this_by_dfs(0, huffman_tree.root());
+			}
 
-				fill_dic_by_dfs(0, htree.root());
+		private:
+			void fill_this_by_dfs(CodeWord path, SharedNode node)
+			{
+				if (!node)
+					return;
+
+				if (node->character_ != 0)
+				{
+					(*this)[node->character_] = path;
+				}
+				else
+				{
+					fill_this_by_dfs((path << 1) + 0, node->left_);
+					fill_this_by_dfs((path << 1) + 1, node->right_);
+				}
 			}
 		};
 	}
