@@ -35,5 +35,8 @@
     <ClInclude Include="encoder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bit_string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

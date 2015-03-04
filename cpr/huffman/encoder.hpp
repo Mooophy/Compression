@@ -25,7 +25,7 @@ namespace cpr
 			{	}
 		
 			//
-			// data members
+			// data members, read only
 			//
 			const std::vector<Char> data;
 			const FrequencyMap<Char, Freq> frequency_map;

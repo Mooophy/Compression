@@ -71,6 +71,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bit_string.hpp" />
     <ClInclude Include="code_word_dictionary.hpp" />
     <ClInclude Include="encoder.hpp" />
     <ClInclude Include="frequency_map.hpp" />
