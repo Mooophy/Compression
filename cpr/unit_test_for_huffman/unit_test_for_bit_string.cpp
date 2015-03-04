@@ -25,12 +25,12 @@ namespace unit_test_for_huffman
 		{
 			cpr::huffman::BitString<char> bit_string;
 
-			Assert::AreEqual(1u, bit_string.bit_length(0));
-			Assert::AreEqual(7u, bit_string.bit_length(127));
-			Assert::AreEqual(8u, bit_string.bit_length(-1));
-			Assert::AreEqual(8u, bit_string.bit_length(-127));
-			Assert::AreEqual(8u, bit_string.bit_length(-128));
-			Assert::AreNotEqual(8u, bit_string.bit_length(-129));
+			Assert::AreEqual(1u, bit_string.bit_length(0x00));
+			Assert::AreEqual(7u, bit_string.bit_length(0x7f));
+			Assert::AreEqual(8u, bit_string.bit_length(-0x01));
+			Assert::AreEqual(8u, bit_string.bit_length(-0x7f));
+			Assert::AreEqual(8u, bit_string.bit_length(-0x80));
+			Assert::AreNotEqual(8u, bit_string.bit_length(-0x81));
 		}
 	};
 }
