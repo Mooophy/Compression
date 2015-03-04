@@ -13,15 +13,16 @@ namespace unit_test_for_huffman
 		TEST_METHOD(ctor)
 		{
 			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
-			Assert::AreEqual((unsigned)11, encoder.data.size());
 
-			//test each character
+			//test each character in data
+			Assert::AreEqual((unsigned)11, encoder.data.size());
+			
 			std::string content = "abcbbdeeead";
 			auto it = content.cbegin();
 			for (auto ch : encoder.data)
 				Assert::AreEqual(ch, *it++);
 
-			//test frequency_map
+			//test frequency_map part
 			Assert::AreEqual(5u, encoder.frequency_map.size());
 
 			Assert::AreEqual(2l, encoder.frequency_map.at('a'));
@@ -30,7 +31,9 @@ namespace unit_test_for_huffman
 			Assert::AreEqual(2l, encoder.frequency_map.at('d'));
 			Assert::AreEqual(3l, encoder.frequency_map.at('e'));
 
+			//test huffman_tree part
+			std::string str_expected = "";
+			Assert::AreEqual(str_expected, encoder.huffman_tree.to_string());
 		}
-
 	};
 }

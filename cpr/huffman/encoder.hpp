@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdexcept>
 #include "frequency_map.hpp"
+#include "huffman_tree.hpp"
 
 
 #ifndef ENCODER_HPP
@@ -19,11 +20,16 @@ namespace cpr
 		{
 		public:
 			explicit Encoder(std::string path)
-				: data(read_file(path)), frequency_map(data)
+				: data(read_file(path)), frequency_map(data), huffman_tree(frequency_map)
 			{	}
 		
+			//
+			// data members
+			//
 			const std::vector<Char> data;
 			const FrequencyMap<Char, Freq> frequency_map;
+			const HuffmanTree<Char, Freq> huffman_tree;
+
 		private:
 			std::vector<Char> read_file(std::string path)const
 			{
