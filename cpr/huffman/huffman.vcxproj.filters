@@ -32,5 +32,8 @@
     <ClInclude Include="code_word_dictionary.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="encoder.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

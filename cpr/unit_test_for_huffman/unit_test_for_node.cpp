@@ -7,7 +7,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace unit_test_for_huffman
 {
-	using Node = cpr::huffman::Node <unsigned char, unsigned long > ;
+	using Node = cpr::huffman::Node <char, long > ;
 
 	TEST_CLASS(test_node)
 	{
@@ -17,8 +17,8 @@ namespace unit_test_for_huffman
 		{
 			Node node;
 
-			Assert::AreEqual((unsigned char)0, node.character_);
-			Assert::AreEqual(0ul, node.freq_);
+			Assert::AreEqual((char)0, node.character_);
+			Assert::AreEqual(0l, node.freq_);
 			Assert::IsNull(node.left_.get());
 			Assert::IsNull(node.right_.get());
 		}
@@ -27,17 +27,17 @@ namespace unit_test_for_huffman
 		{
 			Node node{'a', 42ul};
 
-			Assert::AreEqual((unsigned char)'a', node.character_);
-			Assert::AreEqual(42ul, node.freq_);
+			Assert::AreEqual('a', node.character_);
+			Assert::AreEqual(42l, node.freq_);
 			Assert::IsNull(node.left_.get());
 			Assert::IsNull(node.right_.get());
 		}
 
 		TEST_METHOD(copy_ctor)
 		{
-			Node lhs{ 'a', 42ul };
-			lhs.left_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
-			lhs.right_ = cpr::huffman::make_new_node<unsigned char, unsigned long>('b', 99ul);
+			Node lhs{ 'a', 42l };
+			lhs.left_ = cpr::huffman::make_new_node<char, long>();
+			lhs.right_ = cpr::huffman::make_new_node<char, long>('b', 99l);
 			Node rhs(lhs);
 
 			Assert::AreEqual(lhs.character_, rhs.character_);
@@ -58,31 +58,31 @@ namespace unit_test_for_huffman
 
 		TEST_METHOD(make_new_node_without_args)
 		{
-			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>();
+			auto pointer = cpr::huffman::make_new_node<char, long>();
 
-			Assert::AreEqual((unsigned char)0, pointer->character_);
-			Assert::AreEqual(0ul, pointer->freq_);
+			Assert::AreEqual((char)0, pointer->character_);
+			Assert::AreEqual(0l, pointer->freq_);
 			Assert::IsNull(pointer->left_.get());
 			Assert::IsNull(pointer->right_.get());
 		}
 
 		TEST_METHOD(make_new_node_with_2_args)
 		{
-			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
+			auto pointer = cpr::huffman::make_new_node<char, long>('a', 42l);
 
-			Assert::AreEqual((unsigned char)'a', pointer->character_);
-			Assert::AreEqual(42ul, pointer->freq_);
+			Assert::AreEqual('a', pointer->character_);
+			Assert::AreEqual(42l, pointer->freq_);
 			Assert::IsNull(pointer->left_.get());
 			Assert::IsNull(pointer->right_.get());
 		}
 
 		TEST_METHOD(make_new_node_that_calling_copy_ctor)
 		{
-			auto copied_from = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
-			copied_from->left_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
-			copied_from->right_ = cpr::huffman::make_new_node<unsigned char, unsigned long>();
+			auto copied_from = cpr::huffman::make_new_node<char, long>('a', 42ul);
+			copied_from->left_ = cpr::huffman::make_new_node<char, long>();
+			copied_from->right_ = cpr::huffman::make_new_node<char, long>();
 
-			auto copied_to = cpr::huffman::make_new_node<unsigned char, unsigned long>(*copied_from);
+			auto copied_to = cpr::huffman::make_new_node<char, long>(*copied_from);
 
 			Assert::AreEqual(copied_from->character_, copied_to->character_);
 			Assert::AreEqual(copied_from->freq_, copied_to->freq_);
@@ -99,7 +99,7 @@ namespace unit_test_for_huffman
 
 		TEST_METHOD(for_shared_pointer)
 		{
-			auto pointer = cpr::huffman::make_new_node<unsigned char, unsigned long>('a', 42ul);
+			auto pointer = cpr::huffman::make_new_node<char, long>('a', 42l);
 			auto p2 = pointer;
 			auto p3 = p2;
 		}

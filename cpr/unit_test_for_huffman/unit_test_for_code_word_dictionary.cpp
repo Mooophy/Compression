@@ -6,9 +6,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace unit_test_for_huffman
 {
-	using FrequencyMap = cpr::huffman::FrequencyMap < unsigned char, unsigned long > ;
-	using HuffmanTree = cpr::huffman::HuffmanTree < unsigned char, unsigned long > ;
-	using CodeWordDictionary = cpr::huffman::CodeWordDictionary < unsigned char, unsigned long, unsigned char > ;
+	using FrequencyMap = cpr::huffman::FrequencyMap < char, long > ;
+	using HuffmanTree = cpr::huffman::HuffmanTree < char, long > ;
+	using CodeWordDictionary = cpr::huffman::CodeWordDictionary < char, long, char > ;
 
 	TEST_CLASS(unit_test_for_code_word_dictionary)
 	{
@@ -17,7 +17,7 @@ namespace unit_test_for_huffman
 		TEST_METHOD(ctor)
 		{
 			//setup huffman tree for testing code word dictionary
-			auto empty_case = std::vector<unsigned char>();
+			auto empty_case = std::vector<char>();
 			FrequencyMap fmap_from_clrs(empty_case);
 			fmap_from_clrs['a'] = 45;
 			fmap_from_clrs['b'] = 13;

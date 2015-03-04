@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code_word_dictionary.hpp" />
+    <ClInclude Include="encoder.hpp" />
     <ClInclude Include="frequency_map.hpp" />
     <ClInclude Include="huffman_tree.hpp" />
     <ClInclude Include="node.hpp" />

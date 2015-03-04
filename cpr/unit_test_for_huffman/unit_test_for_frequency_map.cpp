@@ -13,13 +13,13 @@ namespace unit_test_for_huffman
 		
 		TEST_METHOD(ctor)
 		{
-			std::vector<unsigned char> test_case{ 'a', 'a', 'a', 'a', 'b', 'b', 'b', 'c' };
-			cpr::huffman::FrequencyMap<unsigned char, unsigned long> fmap(test_case);
+			std::vector<char> test_case{ 'a', 'a', 'a', 'a', 'b', 'b', 'b', 'c' };
+			cpr::huffman::FrequencyMap<char, long> fmap(test_case);
 
 			Assert::AreEqual(3u, fmap.size());
-			Assert::AreEqual(4ul, fmap.at('a'));
-			Assert::AreEqual(3ul, fmap.at('b'));
-			Assert::AreEqual(1ul, fmap.at('c'));
+			Assert::AreEqual(4l, fmap.at('a'));
+			Assert::AreEqual(3l, fmap.at('b'));
+			Assert::AreEqual(1l, fmap.at('c'));
  		}
 
 	};
