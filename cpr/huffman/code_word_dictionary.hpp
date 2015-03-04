@@ -15,7 +15,7 @@ namespace cpr
 		public:
 			explicit CodeWordDictionary(HuffmanTree<Char, Freq> const& huffman_tree)
 			{
-				fill_this_by_dfs(0, huffman_tree.root());
+				fill_this_by_dfs(0, huffman_tree.root);
 			}
 
 		private:

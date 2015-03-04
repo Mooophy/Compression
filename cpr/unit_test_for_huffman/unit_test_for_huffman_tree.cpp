@@ -19,7 +19,7 @@ namespace unit_test_for_huffman
 			std::vector<char> test_case{ 'a', 'a', 'a', 'a', 'b', 'b', 'b', 'c' };
 			FrequencyMap fmap(test_case);
 			HuffmanTree htree{ fmap };
-			Assert::IsNotNull(htree.root().get());
+			Assert::IsNotNull(htree.root.get());
 
 			
 			//case 2 based on 16.3 clrs 
@@ -33,9 +33,9 @@ namespace unit_test_for_huffman
 			fmap_from_clrs['f'] = 5;
 			HuffmanTree htree_from_clrs{ fmap_from_clrs };
 
-			Assert::AreEqual(100l, htree_from_clrs.root()->freq_);
-			Assert::AreEqual((char)0, htree_from_clrs.root()->character_);
-			Assert::AreEqual((char)'a', htree_from_clrs.root()->left_->character_);
+			Assert::AreEqual(100l, htree_from_clrs.root->freq_);
+			Assert::AreEqual((char)0, htree_from_clrs.root->character_);
+			Assert::AreEqual((char)'a', htree_from_clrs.root->left_->character_);
 
 			//! the rest is tested below using method "to_string".
 		}

@@ -21,13 +21,13 @@ namespace cpr
 			using SharedNode = typename Node<Char, Freq>::SharedNode;
 			
 			explicit HuffmanTree(FrequencyMap<Char, Freq> const& map)
-				: root_{make_tree(map)}
+				: root{make_tree(map)}
 			{}
 
-			SharedNode root() const
-			{
-				return root_;
-			}
+			//SharedNode root() const
+			//{
+			//	return root_;
+			//}
 
 			std::string to_string() const
 			{
@@ -48,13 +48,14 @@ namespace cpr
 					}
 				};
 
-				inorder(root_);
+				inorder(root);
 				return str;
 			}
 
-		private:
-			const SharedNode root_;
+		//private:
+			const SharedNode root;
 
+		private:
 			// huffman coding algorithm 
 			// based on a pseudocode on 16.3 CLRS 3rd.
 			SharedNode make_tree(FrequencyMap<Char, Freq> const& map) const
