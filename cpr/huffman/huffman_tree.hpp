@@ -10,6 +10,7 @@
 #ifndef HUFFMAN_TREE_HPP
 #define HUFFMAN_TREE_HPP
 
+
 namespace cpr
 {
 	namespace huffman

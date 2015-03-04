@@ -35,6 +35,16 @@ namespace unit_test_for_huffman
 			//test huffman_tree part
 			std::string str_expected = "[d,4][_,9][e,5][_,21][a,1][_,3][b,2][_,6][c,3][_,12][f,6]";
 			Assert::AreEqual(str_expected, encoder.huffman_tree.to_string());
+
+			//test code word dictionary part
+			Assert::AreEqual(6u, encoder.code_dictionary.size());
+
+			Assert::IsTrue(0x00 == encoder.code_dictionary.at('d'));	//d : 4 -->0b
+			Assert::IsTrue(0x01 == encoder.code_dictionary.at('e'));	//e : 5 -->1b
+			Assert::IsTrue(0x08 == encoder.code_dictionary.at('a'));	//a : 1 -->1000b
+			Assert::IsTrue(0x09 == encoder.code_dictionary.at('b'));	//b : 2 -->1001b
+			Assert::IsTrue(0x05 == encoder.code_dictionary.at('c'));	//c : 3 -->101b
+			Assert::IsTrue(0x03 == encoder.code_dictionary.at('f'));	//f : 6 -->11b
 		}
 	};
 }
