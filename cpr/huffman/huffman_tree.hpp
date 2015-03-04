@@ -24,11 +24,6 @@ namespace cpr
 				: root{make_tree(map)}
 			{}
 
-			//SharedNode root() const
-			//{
-			//	return root_;
-			//}
-
 			std::string to_string() const
 			{
 				std::string str;
@@ -52,7 +47,6 @@ namespace cpr
 				return str;
 			}
 
-		//private:
 			const SharedNode root;
 
 		private:
