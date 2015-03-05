@@ -53,9 +53,8 @@ namespace unit_test_for_huffman
 
 			std::string expect = "100010011001101101101000011111111111111111";
 			for (auto& ch : expect) ch -= 48; // <-- note this conversion
-			std::string actual = encoder.bit_string.str();
 
-			Assert::AreEqual(expect, actual);
+			Assert::AreEqual(expect, encoder.bit_string.str());
 		}
 	};
 }
