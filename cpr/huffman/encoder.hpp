@@ -6,6 +6,7 @@
 #include "frequency_map.hpp"
 #include "huffman_tree.hpp"
 #include "code_word_dictionary.hpp"
+#include "bit_string.hpp"
 
 
 #ifndef ENCODER_HPP
@@ -23,6 +24,11 @@ namespace cpr
 			explicit Encoder(std::string path)
 				: data(read_file(path)), frequency_map(data), huffman_tree(frequency_map), code_dictionary(huffman_tree)
 			{	}
+
+			BitString<Char> encode()const
+			{
+				return encode_data_and_push_into_bit_string();
+			}
 		
 			//
 			// data members, read only
@@ -41,6 +47,14 @@ namespace cpr
 				auto begin = std::istreambuf_iterator<Char>(file);
 				auto end = std::istreambuf_iterator<Char>();
 				return std::vector<Char>(begin, end);
+			}
+
+			BitString<Char> encode_data_and_push_into_bit_string()const
+			{
+				BitString<Char> encoded;
+				for (auto ch : data)
+					encoded.push_back_bits(code_dictionary.at(ch));
+				return encoded;
 			}
 		};
 	}
