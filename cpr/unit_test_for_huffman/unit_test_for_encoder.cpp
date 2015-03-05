@@ -46,5 +46,17 @@ namespace unit_test_for_huffman
 			Assert::IsTrue(0x05 == encoder.code_dictionary.at('c'));	//c : 3 -->101b
 			Assert::IsTrue(0x03 == encoder.code_dictionary.at('f'));	//f : 6 -->11b
 		}
+
+		TEST_METHOD(encode)
+		{
+			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
+			auto bit_string = encoder.encode();
+
+			std::string expect = "100010011001101101101000011111111111111111";
+			for (auto& ch : expect) ch -= 48; // <-- note this conversion
+			std::string actual = bit_string.str();
+
+			Assert::AreEqual(expect, actual);
+		}
 	};
 }
