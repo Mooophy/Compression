@@ -31,12 +31,16 @@ namespace cpr
 
 			void write(std::string out_file) const
 			{
-				auto first = bit_string.str().cbegin();
-				auto last = bit_string.str().cend();
-				std::ofstream output(out_file, std::ios::binary);
-				auto destination = std::ostreambuf_iterator<Char>(output);
+				//
+				// should convert bit string into a sequence of char first
+				//
 
-				std::copy(first, last, destination);
+				//auto first = bit_string.str().cbegin();
+				//auto last = bit_string.str().cend();
+				//std::ofstream output(out_file, std::ios::binary);
+				//auto destination = std::ostreambuf_iterator<Char>(output);
+
+				//std::copy(first, last, destination);
 			}
 
 			//
