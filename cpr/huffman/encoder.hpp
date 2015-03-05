@@ -28,7 +28,17 @@ namespace cpr
 				code_dictionary(huffman_tree),
 				bit_string(encode_data_and_push_into_bit_string())
 			{	}
-		
+
+			void write(std::string out_file) const
+			{
+				auto first = bit_string.str().cbegin();
+				auto last = bit_string.str().cend();
+				std::ofstream output(out_file, std::ios::binary);
+				auto destination = std::ostreambuf_iterator<Char>(output);
+
+				std::copy(first, last, destination);
+			}
+
 			//
 			// data members, read only
 			//
