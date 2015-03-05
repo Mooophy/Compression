@@ -17,9 +17,17 @@ namespace cpr
 {
 	namespace huffman
 	{
+		// protocol :
+		// FrequencyTable|CompressedPart|Remainder
+		// So the last bits that less than 8 should be append to Remainder part without compressing.
 		template<typename Char, typename Freq, typename CodeWord>
 		class Encoder
 		{
+			//struct CompressedSequence
+			//{
+			//	std::vector<Char> compressed_part;
+			//	Char remainder;
+			//};
 		public:
 			explicit Encoder(std::string path) : 
 				data(read_file(path)), 
@@ -42,6 +50,20 @@ namespace cpr
 
 				//std::copy(first, last, destination);
 			}
+
+			//CompressedSequence compress_bit_string()const
+			//{
+			//	CompressedSequence cs;
+
+			//	auto curr = bit_string.str().cbegin();
+			//	while(	bit_string.str().cend() - curr >= sizeof(Char) ) 
+			//	{
+			//		Char elem = 0;
+			//		for (auto it = curr; it != curr + sizeof(Char); ++it)
+			//			elem = (elem << 1) + *it;
+			//		cs.compressed_part.push_bak(elem);
+			//	}
+			//}
 
 			//
 			// data members, read only
