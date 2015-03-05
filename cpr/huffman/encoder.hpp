@@ -21,14 +21,13 @@ namespace cpr
 		class Encoder
 		{
 		public:
-			explicit Encoder(std::string path)
-				: data(read_file(path)), frequency_map(data), huffman_tree(frequency_map), code_dictionary(huffman_tree)
+			explicit Encoder(std::string path) : 
+				data(read_file(path)), 
+				frequency_map(data), 
+				huffman_tree(frequency_map), 
+				code_dictionary(huffman_tree),
+				bit_string(encode_data_and_push_into_bit_string())
 			{	}
-
-			BitString<Char> encode()const
-			{
-				return encode_data_and_push_into_bit_string();
-			}
 		
 			//
 			// data members, read only
@@ -37,6 +36,7 @@ namespace cpr
 			const FrequencyMap<Char, Freq> frequency_map;
 			const HuffmanTree<Char, Freq> huffman_tree;
 			const CodeWordDictionary<Char, Freq, CodeWord> code_dictionary;
+			const BitString<Char> bit_string;
 
 		private:
 			std::vector<Char> read_file(std::string path)const

@@ -50,11 +50,10 @@ namespace unit_test_for_huffman
 		TEST_METHOD(encode)
 		{
 			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
-			auto bit_string = encoder.encode();
 
 			std::string expect = "100010011001101101101000011111111111111111";
 			for (auto& ch : expect) ch -= 48; // <-- note this conversion
-			std::string actual = bit_string.str();
+			std::string actual = encoder.bit_string.str();
 
 			Assert::AreEqual(expect, actual);
 		}
