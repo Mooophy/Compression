@@ -78,6 +78,8 @@ namespace cpr
 				compressed_data.push_back(remainder);
 				compressed_data.push_back(delimiter);
 				compressed_data.push_back(data_.cend() - curr);//remainder part
+
+				return compressed_data;
 			}
 
 		private:
