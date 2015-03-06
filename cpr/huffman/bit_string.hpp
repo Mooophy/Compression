@@ -50,6 +50,36 @@ namespace cpr
 				return count;
 			}
 
+			// protocol :
+			// FrequencyTable|CompressedPart|Remainder|RemainderSize
+			std::string compress(Char delimiter) const
+			{
+				std::string compressed_data;
+				auto curr = data_.cbegin();
+
+				//for compressed part
+				while (data_.cend() - curr >= sizeof(Char))
+				{
+					Char ch = 0;
+					auto peek = curr;
+					for (; peek != curr + sizeof(Char); ++peek)
+						ch = (ch << 1) + *peek;
+					compressed_data.push_back(ch);
+
+					curr = peek;
+				}
+
+				compressed_data.push_back(delimiter);
+
+				//for remainder part and remainder size
+				Char remainder = 0;
+				for (auto peek = curr; peek != data_.cend(); ++peek)
+					remainder = (remainder << 1) + *peek;
+				compressed_data.push_back(remainder);
+				compressed_data.push_back(delimiter);
+				compressed_data.push_back(data_.cend() - curr);//remainder part
+			}
+
 		private:
 			std::string data_;
 		};
