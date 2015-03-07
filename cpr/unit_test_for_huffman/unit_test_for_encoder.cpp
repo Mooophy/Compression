@@ -56,5 +56,17 @@ namespace unit_test_for_huffman
 
 			Assert::AreEqual(expect, encoder.bit_string.str());
 		}
+
+		TEST_METHOD(write_case1)
+		{
+			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
+			encoder.write("test_for_encoder.cpr", '|');
+		}
+
+		TEST_METHOD(write_case2)
+		{
+			cpr::huffman::Encoder<char, long, char> encoder("shake.txt");
+			encoder.write("shake.cpr", '|');
+		}
 	};
 }
