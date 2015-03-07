@@ -91,6 +91,8 @@ namespace unit_test_for_huffman
 				Assert::AreEqual(expect[idx], actual[idx]);
 		}
 
+		//1 minute to run this case 2M text file
+		//1951KB -> 963 KB
 		TEST_METHOD(write_case2)
 		{
 			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/shake.txt");
