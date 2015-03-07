@@ -58,11 +58,11 @@ namespace cpr
 				auto curr = data_.cbegin();
 
 				//for compressed part
-				while (data_.cend() - curr >= sizeof(Char))
+				while (data_.cend() - curr >= sizeof(Char) * 8)
 				{
 					Char ch = 0;
 					auto peek = curr;
-					for (; peek != curr + sizeof(Char); ++peek)
+					for (; peek != curr + sizeof(Char) * 8; ++peek)
 						ch = (ch << 1) + *peek;
 					compressed_data.push_back(ch);
 

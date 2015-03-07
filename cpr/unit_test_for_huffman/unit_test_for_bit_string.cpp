@@ -30,7 +30,7 @@ namespace unit_test_for_huffman
 			Assert::AreEqual(8u, bit_string.bit_length(-0x01));
 			Assert::AreEqual(8u, bit_string.bit_length(-0x7f));
 			Assert::AreEqual(8u, bit_string.bit_length(-0x80));
-			Assert::AreNotEqual(8u, bit_string.bit_length(-0x81));
+			Assert::AreNotEqual(8u, bit_string.bit_length((char)-0x81));
 		}
 
 		TEST_METHOD(push_back_bits)
@@ -40,7 +40,7 @@ namespace unit_test_for_huffman
 			bit_string.push_back_bits(0);
 			Assert::AreEqual((char)0, bit_string.str().front());
 
-			bit_string.push_back_bits(0xff);
+			bit_string.push_back_bits((char)0xff);
 			std::string expected(1, 0);
 			expected += std::string(8, 1);
 			Assert::AreEqual(expected, bit_string.str());
@@ -59,6 +59,59 @@ namespace unit_test_for_huffman
 			case3.push_back_bits(0x07);
 			std::string expected_for_case3(3, 1);
 			Assert::AreEqual(expected_for_case3, case3.str());
+		}
+
+		// protocol :
+		// FrequencyTable|CompressedPart|Remainder|RemainderSize
+
+		TEST_METHOD(compress_case1)
+		{
+			cpr::huffman::BitString<char> bit_string;
+			bit_string.push_back_bits((char)0);
+			std::string compressed = bit_string.compress('|');
+
+			//note the compressed part is empty
+			Assert::AreEqual(4u, compressed.size());  
+			std::string exprected{ '|', 0, '|', 1 };
+			Assert::AreEqual(exprected, compressed);
+		}
+
+		TEST_METHOD(compress_case2)
+		{
+			cpr::huffman::BitString<char> bit_string;
+			bit_string.push_back_bits((char)0xff);
+			std::string compressed = bit_string.compress('|');
+			Assert::AreEqual(5u, compressed.size());
+
+			std::string exprected{ (char)0xff, '|', 0, '|', 0 };
+			Assert::AreEqual(exprected, compressed);
+		}
+
+		TEST_METHOD(compress_case3)
+		{
+			cpr::huffman::BitString<char> bit_string;
+			bit_string.push_back_bits((char)0X00);
+			bit_string.push_back_bits((char)0Xff);
+			std::string compressed = bit_string.compress('|');
+
+			Assert::AreEqual(5u, compressed.size());
+
+			std::string exprected{ (char)0x7f, '|', 1, '|', 1 };
+			Assert::AreEqual(exprected, compressed);
+		}
+
+		TEST_METHOD(compress_case4)
+		{
+			cpr::huffman::BitString<char> bit_string;
+			bit_string.push_back_bits((char)0X00);
+			bit_string.push_back_bits((char)0Xff);
+			bit_string.push_back_bits((char)0Xff);
+			std::string compressed = bit_string.compress('|');
+
+			Assert::AreEqual(6u, compressed.size());
+
+			std::string exprected{ (char)0x7f, (char)0xff, '|', 1, '|', 1 };
+			Assert::AreEqual(exprected, compressed);
 		}
 	};
 }
