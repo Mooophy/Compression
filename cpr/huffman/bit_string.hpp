@@ -77,7 +77,7 @@ namespace cpr
 					remainder = (remainder << 1) + *peek;
 				compressed_data.push_back(remainder);
 				compressed_data.push_back(delimiter);
-				compressed_data.push_back(data_.cend() - curr);//remainder part
+				compressed_data.push_back(data_.cend() - curr);//remainder size
 
 				return compressed_data;
 			}
