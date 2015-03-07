@@ -23,11 +23,6 @@ namespace cpr
 		template<typename Char, typename Freq, typename CodeWord>
 		class Encoder
 		{
-			//struct CompressedSequence
-			//{
-			//	std::vector<Char> compressed_part;
-			//	Char remainder;
-			//};
 		public:
 			explicit Encoder(std::string path) : 
 				data(read_file(path)), 
@@ -39,31 +34,14 @@ namespace cpr
 
 			void write(std::string out_file) const
 			{
-				//
-				// should convert bit string into a sequence of char first
-				//
-
-				//auto first = bit_string.str().cbegin();
-				//auto last = bit_string.str().cend();
-				//std::ofstream output(out_file, std::ios::binary);
-				//auto destination = std::ostreambuf_iterator<Char>(output);
-
-				//std::copy(first, last, destination);
+				//save compressed data without frequency table.
+				//next version add frequency table with compressed data
+				
+				std::ofstream ofs(out_file, std::ios::binary);
+				auto destination = std::ostreambuf_iterator<Char>(ofs);
+				auto compressed_data = bit_string.compress();
+				std::copy(compressed_data.cbegin(), compressed_data.cend(), destination);
 			}
-
-			//CompressedSequence compress_bit_string()const
-			//{
-			//	CompressedSequence cs;
-
-			//	auto curr = bit_string.str().cbegin();
-			//	while(	bit_string.str().cend() - curr >= sizeof(Char) ) 
-			//	{
-			//		Char elem = 0;
-			//		for (auto it = curr; it != curr + sizeof(Char); ++it)
-			//			elem = (elem << 1) + *it;
-			//		cs.compressed_part.push_bak(elem);
-			//	}
-			//}
 
 			//
 			// data members, read only
