@@ -73,7 +73,6 @@ namespace unit_test_for_huffman
 		//	11			--	0x03
 		//		-->
 		// [0x89][0x9b][0x68][0x7f][0xff]|[0x03]|[0x02]		final data using protocol (no FrequencyTable part in this version) : FrequencyTable|CompressedPart|Remainder|RemainderSize
-		//																														 ^^^^^^^^^^^^^^^ no this part yet, to be added in next version	
 		TEST_METHOD(write_case1)
 		{
 			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
@@ -84,14 +83,10 @@ namespace unit_test_for_huffman
 			auto begin = std::istreambuf_iterator<char>(ifs);
 			auto end = std::istreambuf_iterator<char>();
 			std::vector<char> actual(begin, end);
-
-			std::vector<char> expect{ (char)0x89, (char)0x9b, (char)0x68, (char)0x7f, (char)0xff, '|', (char)0x03, '|', (char)0x02 };
-			//						  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      ^^^^^^^^^^^      ^^^^^^^^^^ 	
-			//						  Compressed data												   Remainder		Size for remainder
-			
 			Assert::AreEqual(9u, actual.size());
 			Assert::AreEqual((char)0x89, actual[0]);
 
+			std::vector<char> expect{ (char)0x89, (char)0x9b, (char)0x68, (char)0x7f, (char)0xff, '|', (char)0x03, '|', (char)0x02 };
 			for (unsigned idx = 0; idx != 9u; ++idx)
 				Assert::AreEqual(expect[idx], actual[idx]);
 		}
