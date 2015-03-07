@@ -16,7 +16,7 @@ namespace unit_test_for_huffman
 		
 		TEST_METHOD(ctor)
 		{
-			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
+			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/test_for_encoder.txt");
 
 			//test each character in data
 			Assert::AreEqual(21u, encoder.data.size());
@@ -53,7 +53,7 @@ namespace unit_test_for_huffman
 
 		TEST_METHOD(encode)
 		{
-			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
+			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/test_for_encoder.txt");
 
 			std::string expect = "100010011001101101101000011111111111111111";
 			for (auto& ch : expect) ch -= 48; // <-- note this conversion
@@ -75,10 +75,10 @@ namespace unit_test_for_huffman
 		// [0x89][0x9b][0x68][0x7f][0xff]|[0x03]|[0x02]		final data using protocol (no FrequencyTable part in this version) : FrequencyTable|CompressedPart|Remainder|RemainderSize
 		TEST_METHOD(write_case1)
 		{
-			cpr::huffman::Encoder<char, long, char> encoder("test_for_encoder.txt");
-			encoder.write("test_for_encoder.cpr", '|');
+			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/test_for_encoder.txt");
+			encoder.write("../test_cases/test_for_encoder.cpr", '|');
 
-			std::ifstream ifs("test_for_encoder.cpr", std::ios::binary);
+			std::ifstream ifs("../test_cases/test_for_encoder.cpr", std::ios::binary);
 
 			auto begin = std::istreambuf_iterator<char>(ifs);
 			auto end = std::istreambuf_iterator<char>();
@@ -93,8 +93,8 @@ namespace unit_test_for_huffman
 
 		TEST_METHOD(write_case2)
 		{
-			cpr::huffman::Encoder<char, long, char> encoder("shake.txt");
-			encoder.write("shake.cpr", '|');
+			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/shake.txt");
+			encoder.write("../test_cases/shake.cpr", '|');
 		}
 	};
 }
