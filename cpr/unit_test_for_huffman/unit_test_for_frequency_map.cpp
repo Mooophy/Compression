@@ -33,7 +33,7 @@ namespace unit_test_for_huffman
 		TEST_METHOD(str_case1)
 		{
 			std::string test_case;
-			for (long i = 0; i != 0xabc; ++i)
+			for (int i = 0; i != 0xabc; ++i)
 				test_case += "ab";
 			cpr::huffman::FrequencyMap<char, long> fmap(test_case);
 			std::string expect{ 'a', ':', (char)0x0a, (char)0xbc, ',', 'b', ':', (char)0x0a, (char)0xbc,',' };
