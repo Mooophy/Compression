@@ -34,13 +34,8 @@ namespace cpr
 
 			void write(std::string out_file, Char delimiter) const
 			{
-				//save compressed data without frequency table.
-				//next version add frequency table with compressed data
-				
 				std::ofstream ofs(out_file, std::ios::binary);
-				auto destination = std::ostreambuf_iterator<Char>(ofs);
-				auto compressed_data = bit_string.compress(delimiter);
-				std::copy(compressed_data.cbegin(), compressed_data.cend(), destination);
+				ofs << frequency_map.str() << '|' << bit_string.compress(delimiter);
 			}
 
 			//

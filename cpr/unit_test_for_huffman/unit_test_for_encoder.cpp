@@ -61,6 +61,18 @@ namespace unit_test_for_huffman
 			Assert::AreEqual(expect, encoder.bit_string.str());
 		}
 
+
+		// frequency part :
+		// abbcccddddeeeeeffffff							raw data
+		//		-->
+		// a:1,b:2,c:3,d:4,e:5,f:6,
+		//
+		//
+		// note '|' is added as delimiter for the two parts 
+		//
+		//
+		//
+		// encoded part :
 		// abbcccddddeeeeeffffff							raw data
 		//		-->
 		// 100010011001101101101000011111111111111111		bit string encoded with huffman tree
@@ -72,23 +84,28 @@ namespace unit_test_for_huffman
 		//	1111 1111	--	0xff
 		//	11			--	0x03
 		//		-->
-		// [0x89][0x9b][0x68][0x7f][0xff]|[0x03]|[0x02]		final data using protocol (no FrequencyTable part in this version) : FrequencyTable|CompressedPart|Remainder|RemainderSize
+		// [0x89][0x9b][0x68][0x7f][0xff]|[0x03]|[0x02]		final data using protocol : FrequencyTable|CompressedPart|Remainder|RemainderSize
 		TEST_METHOD(write_case1)
 		{
+			//compress and write
 			cpr::huffman::Encoder<char, long, char> encoder("../test_cases/test_for_encoder.txt");
 			encoder.write("../test_cases/test_for_encoder.cpr", '|');
 
+			// read the compressed file back
 			std::ifstream ifs("../test_cases/test_for_encoder.cpr", std::ios::binary);
-
 			auto begin = std::istreambuf_iterator<char>(ifs);
 			auto end = std::istreambuf_iterator<char>();
-			std::vector<char> actual(begin, end);
-			Assert::AreEqual(9u, actual.size());
-			Assert::AreEqual((char)0x89, actual[0]);
+			std::string actual(begin, end);
+			Assert::AreEqual(34u, actual.size());
 
-			std::vector<char> expect{ (char)0x89, (char)0x9b, (char)0x68, (char)0x7f, (char)0xff, '|', (char)0x03, '|', (char)0x02 };
-			for (unsigned idx = 0; idx != 9u; ++idx)
-				Assert::AreEqual(expect[idx], actual[idx]);
+			//test each char in the compressed file
+			std::string expect = "a:1,b:2,c:3,d:4,e:5,f:6,";
+			for (auto& element : expect)
+				if (isdigit(element))	element -= 48;
+			expect.push_back('|');
+			for (auto ch : { (char)0x89, (char)0x9b, (char)0x68, (char)0x7f, (char)0xff, '|', (char)0x03, '|', (char)0x02 })
+				expect.push_back(ch);
+			Assert::AreEqual(expect, actual);
 		}
 
 		//1 minute to run this case 2M text file
