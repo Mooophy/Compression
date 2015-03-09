@@ -35,7 +35,7 @@ namespace cpr
 			void write(std::string out_file, Char delimiter) const
 			{
 				std::ofstream ofs(out_file, std::ios::binary);
-				ofs << frequency_map.str() << '|' << bit_string.compress(delimiter);
+				ofs << frequency_map.str() << delimiter << bit_string.compress(delimiter);
 			}
 
 			//
