@@ -9,8 +9,6 @@ namespace cpr
 {
 	namespace huffman
 	{
-		// could be extended to read file directly, depending on later design.
-		// could be extended to write file directly, depending on later design. 
 		template<typename Char, typename Freq>
 		class FrequencyMap : public std::map < Char, Freq >
 		{
@@ -45,7 +43,7 @@ namespace cpr
 			std::string frequency_to_string(Freq freq) const
 			{
 				std::deque < char > dq;
-				for (char ch = 0; freq > 0; freq >>= 8)
+				for (/* */; freq > 0; freq >>= 8)
 					dq.push_front(freq & 0xff);
 				return std::string(dq.begin(), dq.end());
 			}
