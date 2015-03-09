@@ -73,10 +73,8 @@ namespace cpr
 					for (int count = 1; count != map.size(); ++count)
 					{
 						auto merge = make_new_node<Char, Freq>();
-						merge->left_ = make_new_node(*queue.top());
-						queue.pop();
-						merge->right_ = make_new_node(*queue.top());
-						queue.pop();
+						merge->left_ = queue.top();		queue.pop();
+						merge->right_ = queue.top();	queue.pop();
 						merge->freq_ = merge->left_->freq_ + merge->right_->freq_;
 						queue.push(merge);
 					}
