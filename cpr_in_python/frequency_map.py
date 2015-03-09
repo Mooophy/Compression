@@ -22,6 +22,7 @@ class FrequencyMap():
     def __str__(self):
         return ','.join([(key + ':' + str(self.dictionary[key])) for key in self.dictionary.keys()]) + ','
 
+#for testing, move to unit tests later on
 seq = ['a', 'a', 'a', 'a']
 seq2 = 'aaazzzaaaacccccccsssbb'
 
