@@ -184,3 +184,6 @@ FakesAssemblies/
 
 #
 *build*
+
+#for pycharm
+*.idea*
