@@ -187,3 +187,6 @@ FakesAssemblies/
 
 #for pycharm
 *.idea*
+*.xml
+*.name
+*.iml
