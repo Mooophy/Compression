@@ -15,3 +15,11 @@ class Node:
 
     def is_leaf(self):
         return not self.left and not self.right
+
+    def __gt__(self, other):
+        """
+
+        :type other: Node
+        """
+        assert isinstance(other, Node)
+        return self.frequency > other.frequency if self.frequency != other.frequency else self.character > other.character
