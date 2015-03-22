@@ -1,2 +1,2 @@
 # Compression
-Data Compression for 159333
+Data Compression using Huffman coding, LZW and Cosine Transform.
