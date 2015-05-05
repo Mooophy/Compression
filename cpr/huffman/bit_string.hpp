@@ -7,85 +7,85 @@
 
 namespace cpr
 {
-	namespace huffman
-	{
-		template<typename Char>
-		class BitString
-		{
-		public:
-			BitString()
-				: data_{}
-			{	}
+    namespace huffman
+    {
+        template<typename Char>
+        class BitString
+        {
+        public:
+            BitString()
+                : data_{}
+            {	}
 
-			std::string const& str() const
-			{
-				return data_;
-			}
-			
-			void push_back_bits(Char bits)
-			{
-				if (0 == bit_length(bits))
-				{
-					data_.push_back(bits);
-				}
-				else
-				{
-					for (int pos = bit_length(bits) - 1; pos >= 0; --pos)
-					{
-						char curr_bit = ((bits & (1 << pos)) >> pos);
-						data_.push_back(curr_bit);
-					}
-				}
-			}
+            std::string const& str() const
+            {
+                return data_;
+            }
 
-			unsigned bit_length(Char ch) const
-			{
-				if (ch < 0)
-					return sizeof (ch) * 8; 
-				if (ch == 0)
-					return 1;
+            void push_back_bits(Char bits)
+            {
+                if (0 == bit_length(bits))
+                {
+                    data_.push_back(bits);
+                }
+                else
+                {
+                    for (int pos = bit_length(bits) - 1; pos >= 0; --pos)
+                    {
+                        char curr_bit = ((bits & (1 << pos)) >> pos);
+                        data_.push_back(curr_bit);
+                    }
+                }
+            }
 
-				unsigned count = 0;
-				for (; ch > 0; ch >>= 1) ++count;
-				return count;
-			}
+            unsigned bit_length(Char ch) const
+            {
+                if (ch < 0)
+                    return sizeof(ch) * 8;
+                if (ch == 0)
+                    return 1;
 
-			// protocol :
-			// FrequencyTable|CompressedPart|Remainder|RemainderSize
-			std::string compress(Char delimiter) const
-			{
-				std::string compressed_data;
-				auto curr = data_.cbegin();
+                unsigned count = 0;
+                for (; ch > 0; ch >>= 1) ++count;
+                return count;
+            }
 
-				//for compressed part
-				while (data_.cend() - curr >= sizeof(Char) * 8)
-				{
-					Char ch = 0;
-					auto peek = curr;
-					for (; peek != curr + sizeof(Char) * 8; ++peek)
-						ch = (ch << 1) + *peek;
-					compressed_data.push_back(ch);
+            // protocol :
+            // FrequencyTable|CompressedPart|Remainder|RemainderSize
+            std::string compress(Char delimiter) const
+            {
+                std::string compressed_data;
+                auto curr = data_.cbegin();
 
-					curr = peek;
-				}
+                //for compressed part
+                while (data_.cend() - curr >= sizeof(Char) * 8)
+                {
+                    Char ch = 0;
+                    auto peek = curr;
+                    for (; peek != curr + sizeof(Char) * 8; ++peek)
+                        ch = (ch << 1) + *peek;
+                    compressed_data.push_back(ch);
 
-				compressed_data.push_back(delimiter);
+                    curr = peek;
+                }
 
-				//for remainder part and remainder size
-				Char remainder = 0;
-				for (auto peek = curr; peek != data_.cend(); ++peek)
-					remainder = (remainder << 1) + *peek;
-				compressed_data.push_back(remainder);
-				compressed_data.push_back(delimiter);
-				compressed_data.push_back(data_.cend() - curr);//remainder size
+                compressed_data.push_back(delimiter);
 
-				return compressed_data;
-			}
+                //for remainder part and remainder size
+                Char remainder = 0;
+                for (auto peek = curr; peek != data_.cend(); ++peek)
+                    remainder = (remainder << 1) + *peek;
+                compressed_data.push_back(remainder);
+                compressed_data.push_back(delimiter);
+                compressed_data.push_back(data_.cend() - curr);//remainder size
 
-		private:
-			std::string data_;
-		};
-	}
+                return compressed_data;
+            }
+
+        private:
+            std::string data_;
+        };
+    }
 }
 
 

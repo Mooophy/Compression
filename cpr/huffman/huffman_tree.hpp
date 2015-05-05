@@ -13,76 +13,76 @@
 
 namespace cpr
 {
-	namespace huffman
-	{
-		template<typename Char, typename Freq>
-		class HuffmanTree
-		{
-		public:
-			using SharedNode = typename Node<Char, Freq>::SharedNode;
-			
-			explicit HuffmanTree(FrequencyMap<Char, Freq> const& map)
-				: root{make_tree(map)}
-			{}
+    namespace huffman
+    {
+        template<typename Char, typename Freq>
+        class HuffmanTree
+        {
+        public:
+            using SharedNode = typename Node<Char, Freq>::SharedNode;
 
-			std::string to_string() const
-			{
-				std::string str;
-				std::function<void(SharedNode)> inorder = [&](SharedNode node)
-				{
-					if (node)
-					{
-						inorder(node->left_);
+            explicit HuffmanTree(FrequencyMap<Char, Freq> const& map)
+                : root{ make_tree(map) }
+            {}
 
-						str.push_back('[');
-						str.push_back(node->character_ == 0 ? '_' : node->character_);
-						str.push_back(',');
-						str += std::to_string(node->freq_);
-						str.push_back(']');
-						
-						inorder(node->right_);
-					}
-				};
+            std::string to_string() const
+            {
+                std::string str;
+                std::function<void(SharedNode)> inorder = [&](SharedNode node)
+                {
+                    if (node)
+                    {
+                        inorder(node->left_);
 
-				inorder(root);
-				return str;
-			}
+                        str.push_back('[');
+                        str.push_back(node->character_ == 0 ? '_' : node->character_);
+                        str.push_back(',');
+                        str += std::to_string(node->freq_);
+                        str.push_back(']');
 
-			const SharedNode root;
+                        inorder(node->right_);
+                    }
+                };
 
-		private:
-			// huffman coding algorithm 
-			// based on a pseudocode on 16.3 CLRS 3rd.
-			SharedNode make_tree(FrequencyMap<Char, Freq> const& map) const
-			{
-					auto greater = [](SharedNode lhs, SharedNode rhs)
-					{
-						if (lhs->freq_ != rhs->freq_)
-							return lhs->freq_ > rhs->freq_;
-						else
-							return lhs->character_ > rhs->character_;
-					};
+                inorder(root);
+                return str;
+            }
+
+            const SharedNode root;
+
+        private:
+            // huffman coding algorithm 
+            // based on a pseudocode on 16.3 CLRS 3rd.
+            SharedNode make_tree(FrequencyMap<Char, Freq> const& map) const
+            {
+                auto greater = [](SharedNode lhs, SharedNode rhs)
+                {
+                    if (lhs->freq_ != rhs->freq_)
+                        return lhs->freq_ > rhs->freq_;
+                    else
+                        return lhs->character_ > rhs->character_;
+                };
 
 
-					using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>, decltype(greater) > ;
+                using MinPriorityQueue = std::priority_queue < SharedNode, std::vector<SharedNode>, decltype(greater) > ;
 
-					MinPriorityQueue queue(greater);
-					for (auto const& pair : map)
-						queue.push(make_new_node(pair.first, pair.second));
-					
-					for (int count = 1; count != map.size(); ++count)
-					{
-						auto merge = make_new_node<Char, Freq>();
-						merge->left_ = queue.top();		queue.pop();
-						merge->right_ = queue.top();	queue.pop();
-						merge->freq_ = merge->left_->freq_ + merge->right_->freq_;
-						queue.push(merge);
-					}
+                MinPriorityQueue queue(greater);
+                for (auto const& pair : map)
+                    queue.push(make_new_node(pair.first, pair.second));
 
-					return queue.top();
-			}
-		};
-	}
+                for (int count = 1; count != map.size(); ++count)
+                {
+                    auto merge = make_new_node<Char, Freq>();
+                    merge->left_ = queue.top();		queue.pop();
+                    merge->right_ = queue.top();	queue.pop();
+                    merge->freq_ = merge->left_->freq_ + merge->right_->freq_;
+                    queue.push(merge);
+                }
+
+                return queue.top();
+            }
+        };
+    }
 }
 
 #endif // !HUFFMAN_TREE_HPP
