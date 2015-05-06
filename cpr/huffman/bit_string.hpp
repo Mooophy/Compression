@@ -1,92 +1,41 @@
+#pragma once
+#include <bitset>
 #include <string>
-
-
-#ifndef BIT_STRING_HPP
-#define BIT_STRING_HPP
-
+#include <vector>
 
 namespace cpr
 {
     namespace huffman
     {
-        template<typename Char>
         class BitString
         {
         public:
-            BitString()
-                : data_{}
-            {	}
+            explicit BitString(std::string const& input) : data_( make_data(input) ){ }
 
-            std::string const& str() const
+            static auto char_to_bin(char ch) -> std::string
             {
-                return data_;
+                auto bs = std::string(8, 0);
+                for (int i = 7; i != -1; --i)
+                    bs[i] = (ch >> (7 - i)) & 0x1;
+                return bs;
             }
 
-            void push_back_bits(Char bits)
+            auto data() const -> std::string const&{ return data_; }
+            auto str() const -> std::string
             {
-                if (0 == bit_length(bits))
-                {
-                    data_.push_back(bits);
-                }
-                else
-                {
-                    for (int pos = bit_length(bits) - 1; pos >= 0; --pos)
-                    {
-                        char curr_bit = ((bits & (1 << pos)) >> pos);
-                        data_.push_back(curr_bit);
-                    }
-                }
-            }
-
-            unsigned bit_length(Char ch) const
-            {
-                if (ch < 0)
-                    return sizeof(ch) * 8;
-                if (ch == 0)
-                    return 1;
-
-                unsigned count = 0;
-                for (; ch > 0; ch >>= 1) ++count;
-                return count;
-            }
-
-            // protocol :
-            // FrequencyTable|CompressedPart|Remainder|RemainderSize
-            std::string compress(Char delimiter) const
-            {
-                std::string compressed_data;
-                auto curr = data_.cbegin();
-
-                //for compressed part
-                while (data_.cend() - curr >= sizeof(Char) * 8)
-                {
-                    Char ch = 0;
-                    auto peek = curr;
-                    for (; peek != curr + sizeof(Char) * 8; ++peek)
-                        ch = (ch << 1) + *peek;
-                    compressed_data.push_back(ch);
-
-                    curr = peek;
-                }
-
-                compressed_data.push_back(delimiter);
-
-                //for remainder part and remainder size
-                Char remainder = 0;
-                for (auto peek = curr; peek != data_.cend(); ++peek)
-                    remainder = (remainder << 1) + *peek;
-                compressed_data.push_back(remainder);
-                compressed_data.push_back(delimiter);
-                compressed_data.push_back(data_.cend() - curr);//remainder size
-
-                return compressed_data;
+                auto str = data_;
+                for (auto& ch : str) ch += 48;
+                return str;
             }
 
         private:
             std::string data_;
+            auto make_data(std::string const& input) const -> std::string
+            {
+                auto data = std::string{};
+                for (auto ch : input) data += char_to_bin(ch);
+                return data;
+            }
         };
     }
 }
-
-
-#endif // !BIT_STRING_HPP
