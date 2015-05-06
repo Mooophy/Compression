@@ -7,9 +7,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
 {
-	TEST_CLASS(test_frequency_map)
-	{
-	public:
+    TEST_CLASS(test_frequency_map)
+    {
+    public:
 
         TEST_METHOD(frequency_map_len_1)
         {
@@ -21,9 +21,9 @@ namespace UnitTests
             Assert::AreEqual(9u, fmap.at(0));
             Assert::AreEqual(7u, fmap.at(1));
         }
-		
+
         TEST_METHOD(frequency_map_len_2)
-		{
+        {
             auto fa = cpr::huffman::BitString("fa");
             auto splited_data = fa.split_by_length(2);
             auto const fmap = cpr::huffman::FrequencyMap{ splited_data };
@@ -32,7 +32,7 @@ namespace UnitTests
             Assert::AreEqual(1u, fmap.at(0));
             Assert::AreEqual(4u, fmap.at(1));
             Assert::AreEqual(3u, fmap.at(2));
-		}
+        }
 
         TEST_METHOD(frequency_map_len_3)
         {
@@ -83,5 +83,5 @@ namespace UnitTests
             Assert::AreEqual(1u, fmap.at(0x021));
         }
 
-	};
+    };
 }
