@@ -20,12 +20,39 @@ namespace cpr
                 return bs;
             }
 
-            auto data() const -> std::string const&{ return data_; }
+            static auto bin_to_unsigned(std::string const& str) -> unsigned
+            {
+                auto ret = unsigned(0);
+                for (int i = str.size() - 1; i != -1; --i)
+                    ret |= ((str[i] & 0x1) << (str.size() - 1 - i));
+                return ret;
+            }
+
+            auto data() const -> std::string const&
+            { 
+                return data_; 
+            }
+
             auto str() const -> std::string
             {
                 auto str = data_;
                 for (auto& ch : str) ch += 48;
                 return str;
+            }
+
+            auto split_by_length(unsigned len) const -> std::vector < unsigned >
+            {
+                static const unsigned max_len = 8 * sizeof(unsigned);
+                if (len > max_len) 
+                    throw std::exception{ "too many bits" };
+
+                auto ret = std::vector < unsigned > {};
+                auto pos = unsigned(0);
+                for (; data_.size() - pos > len; pos += len)
+                    ret.push_back(bin_to_unsigned(data_.substr(pos, len)));
+                ret.push_back(bin_to_unsigned(data_.substr(pos)));
+
+                return ret;
             }
 
         private:
