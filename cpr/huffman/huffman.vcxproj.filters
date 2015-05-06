@@ -18,5 +18,8 @@
     <ClInclude Include="bit_string.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="frequency_map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

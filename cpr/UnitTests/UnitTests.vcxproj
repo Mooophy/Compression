@@ -91,6 +91,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_bit_string.cpp" />
+    <ClCompile Include="test_frequency_map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\huffman\huffman.vcxproj">
