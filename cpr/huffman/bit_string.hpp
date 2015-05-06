@@ -1,5 +1,4 @@
 #pragma once
-#include <bitset>
 #include <string>
 #include <vector>
 
@@ -10,7 +9,9 @@ namespace cpr
         class BitString
         {
         public:
-            explicit BitString(std::string const& input) : data_( make_data(input) ){ }
+            explicit BitString(std::string const& input) 
+                : data_( make_data(input) )
+            { }
 
             static auto char_to_bin(char ch) -> std::string
             {
