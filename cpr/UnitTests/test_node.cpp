@@ -6,18 +6,18 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UnitTests
 {
-	TEST_CLASS(test_node)
-	{
-	public:
-		
-		TEST_METHOD(test_node_defualt_ctor)
-		{
+    TEST_CLASS(test_node)
+    {
+    public:
+
+        TEST_METHOD(test_node_defualt_ctor)
+        {
             auto node = cpr::huffman::Node{};
             Assert::IsTrue(nullptr == node.left);
             Assert::IsTrue(nullptr == node.right);
             Assert::AreEqual(0u, node.value);
             Assert::AreEqual(0u, node.frequence);
-		}
+        }
 
         TEST_METHOD(test_node_ctor)
         {
@@ -43,5 +43,5 @@ namespace UnitTests
             Assert::IsTrue(sptr->is_leaf());
         }
 
-	};
+    };
 }
