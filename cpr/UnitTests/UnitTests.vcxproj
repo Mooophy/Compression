@@ -92,6 +92,7 @@
     </ClCompile>
     <ClCompile Include="test_bit_string.cpp" />
     <ClCompile Include="test_frequency_map.cpp" />
+    <ClCompile Include="test_node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\huffman\huffman.vcxproj">

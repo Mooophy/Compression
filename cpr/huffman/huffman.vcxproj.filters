@@ -21,5 +21,8 @@
     <ClInclude Include="frequency_map.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="node.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
