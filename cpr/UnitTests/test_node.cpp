@@ -35,6 +35,12 @@ namespace UnitTests
             Assert::IsTrue(nullptr == sptr->right);
             Assert::AreEqual(0u, sptr->value);
             Assert::AreEqual(0u, sptr->frequence);
+
+            auto sptr_ = cpr::huffman::Node::make_new_node(42, 99, nullptr, nullptr);
+            Assert::IsTrue(nullptr == sptr_->left);
+            Assert::IsTrue(nullptr == sptr_->right);
+            Assert::AreEqual(42u, sptr_->value);
+            Assert::AreEqual(99u, sptr_->frequence);
         }
 
         TEST_METHOD(test_is_leaf)
