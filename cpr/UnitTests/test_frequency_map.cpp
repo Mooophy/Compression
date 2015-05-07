@@ -11,6 +11,11 @@ namespace UnitTests
     {
     public:
 
+        TEST_METHOD(frequency_default_ctor)
+        {
+            auto fmap = cpr::huffman::FrequencyMap();
+        }
+
         TEST_METHOD(frequency_map_len_1)
         {
             auto fa = cpr::huffman::BitString("fa");
