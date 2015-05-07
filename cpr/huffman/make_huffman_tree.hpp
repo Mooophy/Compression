@@ -1,3 +1,4 @@
+#pragma once
 #include <queue>
 #include <vector>
 #include <string>
@@ -10,6 +11,7 @@ namespace cpr
 {
     namespace huffman
     {
+        inline // without inline, one definition rull will be voilated and hence link error happens.
         auto make_huffman_tree(cpr::huffman::FrequencyMap const& fmap) -> SharedNode
         {
             auto greater = [](SharedNode lhs, SharedNode rhs)
@@ -31,6 +33,7 @@ namespace cpr
             return q.top();
         }
 
+        inline // without inline, one definition rull will be voilated and hence link error happens.
         auto huffman_tree_to_string(SharedNode tree) -> std::string
         {
             std::function<std::string(SharedNode)> inorder = [&](SharedNode t) -> std::string

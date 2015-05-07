@@ -2,7 +2,8 @@
 #include <unordered_map>
 #include <stack>
 #include <tuple>
-#include "make_huffman_tree.hpp"
+#include "node.hpp"
+//#include "make_huffman_tree.hpp"
 
 
 namespace cpr
@@ -11,21 +12,21 @@ namespace cpr
     {
         class CodeMap : public std::unordered_map<unsigned, std::size_t>
         {
-            void fill_by_dfs(SharedNode node)
+            void fill_by_dfs(SharedNode tree)
             {
                 auto code = std::size_t(0);
-                auto source = std::make_tuple(code, node);
+                auto source = std::make_tuple(code, tree);
                 auto stk = std::stack < decltype(source) > {};
                 for (stk.push(source); !stk.empty(); /* */)
                 {
-                    std::tie(code, node) = stk.top(); stk.pop();
-                    if (node->is_leaf())
+                    std::tie(code, tree) = stk.top(); stk.pop();
+                    if (tree->is_leaf())
                     {
-                        (*this)[node->value] = code;
+                        (*this)[tree->value] = code;
                         continue;
                     }
-                    stk.push(std::make_tuple((code << 1) + 0, node->left));
-                    stk.push(std::make_tuple((code << 1) + 1, node->right));
+                    stk.push(std::make_tuple((code << 1) + 0, tree->left));
+                    stk.push(std::make_tuple((code << 1) + 1, tree->right));
                 }
             }
 
