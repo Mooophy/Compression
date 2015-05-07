@@ -65,6 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="bit_string.hpp" />
+    <ClInclude Include="code_map.hpp" />
     <ClInclude Include="frequency_map.hpp" />
     <ClInclude Include="make_huffman_tree.hpp" />
     <ClInclude Include="node.hpp" />

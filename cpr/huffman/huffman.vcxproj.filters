@@ -27,5 +27,8 @@
     <ClInclude Include="make_huffman_tree.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code_map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
