@@ -1,6 +1,7 @@
 #include <queue>
 #include <vector>
-
+#include <string>
+#include <functional>
 #include "node.hpp"
 #include "frequency_map.hpp"
 
@@ -9,15 +10,14 @@ namespace cpr
 {
     namespace huffman
     {
-        auto make_huffman_tree(cpr::huffman::FrequencyMap const& fmap) -> std::shared_ptr < Node >
+        auto make_huffman_tree(cpr::huffman::FrequencyMap const& fmap) -> SharedNode
         {
-            using SharedPtr = std::shared_ptr < Node > ;
-            auto greater = [](SharedPtr lhs, SharedPtr rhs)
+            auto greater = [](SharedNode lhs, SharedNode rhs)
             {
                 return lhs->frequence != rhs->frequence ? lhs->frequence > rhs->frequence : lhs->value > rhs->value;
             };
 
-            using Q = std::priority_queue < SharedPtr, std::vector<SharedPtr>, decltype(greater) > ;
+            using Q = std::priority_queue < SharedNode, std::vector< SharedNode >, decltype(greater) >;
             auto q = Q(greater);
             for (auto pair : fmap)
                 q.push(Node::make_new_node(pair.first, pair.second, nullptr, nullptr));
@@ -29,6 +29,16 @@ namespace cpr
             }
 
             return q.top();
+        }
+
+        auto huffman_tree_to_string(SharedNode tree) -> std::string
+        {
+            std::function<std::string(SharedNode)> inorder = [&](SharedNode t) -> std::string
+            {
+                return !t ? std::string() : inorder(t->left) + t->to_string() + inorder(t->right);
+            };
+
+            return inorder(tree);
         }
     }
 }

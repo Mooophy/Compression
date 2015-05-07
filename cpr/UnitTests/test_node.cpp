@@ -49,5 +49,12 @@ namespace UnitTests
             Assert::IsTrue(sptr->is_leaf());
         }
 
+        TEST_METHOD(test_to_string)
+        {
+            auto sptr = cpr::huffman::Node::make_new_node();
+            auto expt = std::string("[v=0 : f=0]");
+            Assert::AreEqual(expt, sptr->to_string());
+        }
+
     };
 }
