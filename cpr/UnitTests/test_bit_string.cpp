@@ -10,13 +10,23 @@ namespace UnitTests
     {
     public:
 
+        TEST_METHOD(unsigned_to_bitstring_without_leading_zeros)
+        {
+            Assert::AreEqual(std::string{ 0 }, cpr::huffman::BitString::unsigned_to_bitstring_without_leading_zeros(0u));
+            Assert::AreEqual(std::string{ 1 }, cpr::huffman::BitString::unsigned_to_bitstring_without_leading_zeros(1u));
+            Assert::AreEqual(std::string{ 1, 0 }, cpr::huffman::BitString::unsigned_to_bitstring_without_leading_zeros(2u));
+
+            auto expect = std::string{ 1, 0, 0, 0, 1 };
+            auto actual = cpr::huffman::BitString::unsigned_to_bitstring_without_leading_zeros(17u);
+            Assert::AreEqual(expect, actual);
+        }
+
         TEST_METHOD(bit_len)
         {
             Assert::AreEqual(1u, cpr::huffman::BitString::bit_len(1));
             Assert::AreEqual(1u, cpr::huffman::BitString::bit_len(0));
             Assert::AreEqual(2u, cpr::huffman::BitString::bit_len(3));
             Assert::AreEqual(32u, cpr::huffman::BitString::bit_len(-199));
-
         }
 
         TEST_METHOD(char_to_bitstring)
@@ -30,9 +40,22 @@ namespace UnitTests
             Assert::AreEqual(expect_Z, cpr::huffman::BitString::char_to_bin('Z'));
         }
 
-        TEST_METHOD(bit_string_ctor)
+        TEST_METHOD(bit_string_ctor_for_string)
         {
             auto foo = cpr::huffman::BitString("f");
+        }
+
+        TEST_METHOD(bit_string_ctor_for_vector_of_unsigned)
+        {
+            auto bit_string_for_unsigneds_1 = cpr::huffman::BitString{ std::vector < unsigned > {3, 0, 1, 7} };
+            auto expect1 = std::string{ "1101111" };
+            auto actual1 = bit_string_for_unsigneds_1.str();
+            Assert::AreEqual(expect1, actual1);
+
+            auto bit_string_for_unsigneds_2 = cpr::huffman::BitString{ std::vector < unsigned > {0x23, 0x00, 0x41, 0x17} };
+            auto expect2 = std::string{ "1000110100000110111" };
+            auto actual2 = bit_string_for_unsigneds_2.str();
+            Assert::AreEqual(expect2, actual2);
         }
 
         TEST_METHOD(bit_string_data)

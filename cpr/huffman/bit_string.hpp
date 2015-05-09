@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <bitset>
 
 namespace cpr
 {
@@ -10,9 +11,21 @@ namespace cpr
         {
         public:
             explicit BitString(std::string const& input) 
-                : data_( make_data(input) )
+                : data_{ make_data(input) }
             { }
 
+            explicit BitString(std::vector<unsigned> const& unsigneds)
+                : data_{ make_data(unsigneds) }
+            { }
+
+            static auto unsigned_to_bitstring_without_leading_zeros(unsigned num) -> std::string
+            {
+                auto len = bit_len(num);
+                auto bs = std::string(len, '\0');
+                for (int i = 0; i != len; ++i)
+                    bs[i] = (num & (0x1 << (len - 1 - i))) ? 1 : 0;
+                return bs;
+            }
 
             static auto char_to_bin(char ch) -> std::string
             {
@@ -71,10 +84,10 @@ namespace cpr
             //auto to_chars() const -> std::vector < char >
             //{
             //    static const unsigned len = 8 * sizeof(char);
-            //    auto ret = std::vector < char > {};
-            //    auto pos = unsigned(0);
-
-
+            //    auto chars = std::vector < char > {};
+            //    auto pos = std::size_t(0);
+            //    for (; data_.size() - pos >= len; pos += len)
+            //        chars.
             //}
 
         private:
@@ -82,7 +95,16 @@ namespace cpr
             auto make_data(std::string const& input) const -> std::string
             {
                 auto data = std::string{};
-                for (auto ch : input) data += char_to_bin(ch);
+                for (auto ch : input) 
+                    data += char_to_bin(ch);
+                return data;
+            }
+
+            auto make_data(std::vector<unsigned> const& unsigneds) const -> std::string
+            {
+                auto data = std::string{};
+                for (auto num : unsigneds)
+                    data += unsigned_to_bitstring_without_leading_zeros(num);
                 return data;
             }
         };
