@@ -13,6 +13,7 @@ namespace cpr
                 : data_( make_data(input) )
             { }
 
+
             static auto char_to_bin(char ch) -> std::string
             {
                 auto bs = std::string(8, 0);
@@ -27,6 +28,17 @@ namespace cpr
                 for (int i = str.size() - 1; i != -1; --i)
                     ret |= ((str[i] & 0x1) << (str.size() - 1 - i));
                 return ret;
+            }
+
+            template<typename Integral>
+            static auto bit_len(Integral num) -> std::size_t
+            {
+                if (num < 0) return sizeof(Integral) * 8;
+                if (num == 0)return 1;
+
+                unsigned len = 0;
+                for (; num > 0; num >>= 1) ++len;
+                return len;
             }
 
             auto data() const -> std::string const&
@@ -55,6 +67,15 @@ namespace cpr
 
                 return ret;
             }
+
+            //auto to_chars() const -> std::vector < char >
+            //{
+            //    static const unsigned len = 8 * sizeof(char);
+            //    auto ret = std::vector < char > {};
+            //    auto pos = unsigned(0);
+
+
+            //}
 
         private:
             std::string data_;

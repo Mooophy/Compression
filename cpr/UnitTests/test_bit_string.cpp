@@ -10,6 +10,15 @@ namespace UnitTests
     {
     public:
 
+        TEST_METHOD(bit_len)
+        {
+            Assert::AreEqual(1u, cpr::huffman::BitString::bit_len(1));
+            Assert::AreEqual(1u, cpr::huffman::BitString::bit_len(0));
+            Assert::AreEqual(2u, cpr::huffman::BitString::bit_len(3));
+            Assert::AreEqual(32u, cpr::huffman::BitString::bit_len(-199));
+
+        }
+
         TEST_METHOD(char_to_bitstring)
         {
             Assert::AreEqual(std::string(8, 0), cpr::huffman::BitString::char_to_bin('\0'));
