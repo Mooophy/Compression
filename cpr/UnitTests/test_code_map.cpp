@@ -23,6 +23,15 @@ namespace UnitTests
             fmap_from_clrs[(unsigned)'e'] = 9;
             fmap_from_clrs[(unsigned)'f'] = 5;
             auto root = cpr::huffman::make_huffman_tree(fmap_from_clrs);
+            auto cmap = cpr::huffman::CodeMap(root);
+
+            Assert::IsTrue(6 == cmap.size());
+            Assert::AreEqual(0x00u, cmap.at(unsigned('a')));  //a : 0b
+            Assert::AreEqual(0x04u, cmap.at(unsigned('c')));  //c : 100b
+            Assert::AreEqual(0x05u, cmap.at(unsigned('b')));  //b : 101b
+            Assert::AreEqual(0x0cu, cmap.at(unsigned('f')));  //f : 1100b
+            Assert::AreEqual(0x0du, cmap.at(unsigned('e')));  //e : 1101b
+            Assert::AreEqual(0x07u, cmap.at(unsigned('d')));  //d : 111b
         }
 
     };
