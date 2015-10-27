@@ -1,2 +1,2 @@
 # Compression
-Data Compression using Huffman coding, LZW and Cosine Transform.
+Data Compression using Huffman.
